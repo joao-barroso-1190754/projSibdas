@@ -1,0 +1,3 @@
+Re-upload do projecto para o Git do email institucional. 
+"Remake" do repositório Belisarius00/projSibdas2026 que por sua vez é tambem um remake de Belisarius00/projSibdas de forma a cumprir os requisitos impostos pelas guidelines do projecto.
+Verificável que foi o aluno 1190754 João Barroso a criar pelo CV do mesmo (que tem o Git "Belisarius00" como referência) e READMEs de ambos projectos (a alterar na altura deste commit)
