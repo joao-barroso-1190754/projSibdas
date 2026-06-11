@@ -9,14 +9,15 @@
     <link href="assets/css/styles.css" rel="stylesheet">
 </head>
 
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg fixed-top colour-primary text-light">
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary">
         <div class="container">
             <a class="navbar-brand fw-bold text-light" href="#">MedTech Solutions</a>
             <div>
                 <ul class="navbar-nav">
                     <li><a class="nav-link text-light" href="#inicio">Início</a></li>
                     <li><a class="nav-link text-light" href="#sobre">Sobre Nós</a></li>
+                    <li><a class="nav-link text-light" href="#solucoes">Soluções</a></li>
                     <li><a class="nav-link text-light" href="#contato">Contato</a></li>
                 </ul>
             </div>
@@ -51,20 +52,111 @@
         </div>
     </nav>
 
-    <main class="main-content container text-center">
-        <section id="inicio" class="mb-4">
-            <h1 class="display-4 fw-bold">Bem-vindo à MedTech Solutions</h1>
-            <p class="lead text-muted">Inovação em saúde para um futuro melhor.</p>
+    <main class="container text-center mt-5 pt-5">
+        <section id="inicio" class="text-center mb-5 pb-4">
+            <h1 class="display-4 fw-bold text-primary">Bem-vindo à MedTech Solutions</h1>
+            <p class="lead text-muted">Gestão inteligente e rastreamento de equipamentos hospitalares para um
+                atendimento mais ágil e seguro.</p>
+            <a href="#contato" class="btn btn-primary btn-lg mt-3 px-4 rounded-pill">Agendar Demonstração</a>
         </section>
 
-        <section id="sobre">
-            <h2 class="text-primary mb-4">Sobre Nós</h2>
-            <p class="text-muted">Conheça mais sobre a MedTech Solutions e nosso compromisso com a inovação em saúde.</p>
+        <section id="sobre" class="mb-5 pb-5 border-bottom">
+            <h2 class="text-primary mb-4 text-center">Sobre Nós</h2>
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <p class="text-muted lead">
+                        A MedTech Solutions é especializada em otimizar o ciclo de vida dos ativos médicos. Nosso
+                        ecossistema de gestão garante que seus equipamentos estejam sempre calibrados, localizáveis e
+                        prontos para salvar vidas.
+                    </p>
+                    <p class="text-muted">
+                        Ajudamos hospitais e clínicas a reduzir o tempo de inatividade das máquinas, evitar compras
+                        desnecessárias de inventário "perdido" e garantir total conformidade com as normas de saúde
+                        vigentes através da digitalização de processos.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div
+                        class="bg-light p-5 rounded-3 text-center text-secondary border shadow-sm h-100 d-flex align-items-center justify-content-center">
+                        <span>[Imagem Ilustrativa: Dashboard de Gestão Hospitalar]</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!--puta que pariu agr os commits estao em portugues e ingles, lets fucking go-->
+        <section id="solucoes" class="mb-5 pb-5 border-bottom text-center">
+            <h2 class="text-primary mb-4">Nossas Soluções</h2>
+            <p class="text-muted mb-5">Tecnologia de ponta para resolver os maiores gargalos da engenharia clínica.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <div class="card-body p-4">
+                            <div class="mb-3 text-primary fs-1">📍</div>
+                            <h3 class="h5 card-title text-dark fw-bold">Rastreamento RTLS</h3>
+                            <p class="card-text text-muted">Localize bombas de infusão, monitores e cadeiras de rodas em
+                                tempo real, evitando buscas demoradas e perda de ativos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <div class="card-body p-4">
+                            <div class="mb-3 text-primary fs-1">⚙️</div>
+                            <h3 class="h5 card-title text-dark fw-bold">Manutenção Preditiva</h3>
+                            <p class="card-text text-muted">Receba alertas automatizados para calibrações e ordens de
+                                serviço preventivas antes que os equipamentos apresentem falhas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <div class="card-body p-4">
+                            <div class="mb-3 text-primary fs-1">📋</div>
+                            <h3 class="h5 card-title text-dark fw-bold">Gestão de Conformidade</h3>
+                            <p class="card-text text-muted">Mantenha todos os laudos técnicos, manuais e históricos de
+                                calibração digitalizados e prontos para auditorias da ONA e ANVISA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="contato">
-            <h2 class="text-primary mb-4">Contato</h2>
-            <p class="text-muted">Entre em contato conosco para mais informações.</p>
+        <section id="contato" class="mb-5">
+            <h2 class="text-primary mb-3 text-center">Contato</h2>
+            <p class="text-muted text-center mb-5">Fale com nossos especialistas e descubra como otimizar a engenharia
+                clínica do seu hospital.</p>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-start">
+                    <form class="bg-light p-4 p-md-5 rounded-3 shadow-sm border">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nome" class="form-label fw-bold">Nome Completo</label>
+                                <input type="text" class="form-control" id="nome" placeholder="João da Silva" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="hospital" class="form-label fw-bold">Instituição / Hospital</label>
+                                <input type="text" class="form-control" id="hospital" placeholder="Hospital São Lucas"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-bold">E-mail Corporativo</label>
+                            <input type="email" class="form-control" id="email" placeholder="joao@hospital.com.br"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="mensagem" class="form-label fw-bold">Como podemos ajudar?</label>
+                            <textarea class="form-control" id="mensagem" rows="4"
+                                placeholder="Descreva seus principais desafios na gestão de equipamentos (ex: dificuldade em localizar ativos, falhas no controle de manutenção...)"
+                                required></textarea>
+                        </div>
+                        <div class="text-center d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Enviar Mensagem</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
 
