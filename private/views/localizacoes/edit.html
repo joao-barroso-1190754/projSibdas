@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="../../assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <nav id="top-navbar" class="navbar colour-primary fixed-top">
+        <div class="container-fluid">
+            <span class="navbar-brand text-light fw-bold m-0" id="menu-toggle"
+                title="Clique para esconder/mostrar o menu">
+                Dashboard
+            </span>
+        </div>
+    </nav>
+
+    <div id="wrapper">
+        <aside id="sidebar-wrapper" class="text-light shadow d-flex flex-column"
+            style="min-height: calc(100vh - 60px);">
+
+            <div class="p-3 border-bottom border-secondary text-center mt-2">
+                <small class="d-block text-light">Bem-vindo(a),</small>
+                <strong>username</strong>
+                <span class="badge bg-secondary d-block mt-2">ADMIN</span>
+            </div>
+
+            <div class="list-group list-group-flush mt-2 flex-grow-1">
+                <a href="../dashboard.html" class="list-group-item text-light p-3 border-0">📊Dashboard</a>
+                <a href="../equipamentos/index.html" class="list-group-item text-light p-3 border-0">🩺
+                    Equipamentos</a>
+                <a href="../localizacoes/index.html" class="list-group-item text-light p-3 border-0">📍
+                    Localizações</a>
+                <a href="../fornecedores/index.html" class="list-group-item text-light p-3 border-0">🏢
+                    Fornecedores</a>
+                <a href="#" class="list-group-item p-3 border-0 text-warning">⚙️ Gerir Utilizadores [ADMIN]</a>
+            </div>
+
+            <div class="list-group list-group-flush p-3 border-top border-secondary">
+                <a href="../../../public/index.html" class="text-light text-decoration-none">Sair</a>
+            </div>
+
+        </aside>
+
+        <main id="page-content-wrapper">
+            <div class="container-fluid">
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="text-secondary">📍 Editar Localização</h2>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+
+                        <div class="alert alert-danger shadow-sm">
+                            ERRO!
+                        </div>
+
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header bg-white">
+                                <h5 class="mb-0 mt-2">Atualizar Detalhes do Espaço Físico</h5>
+                            </div>
+                            <div class="card-body bg-light">
+
+                                <form action="edit" method="POST">
+
+                                    <input type="hidden" name="id" value="[Exemplo] 123">
+
+                                    <div class="row g-3">
+                                        <div class="col-md-8">
+                                            <label for="edificio" class="form-label fw-bold">Edifício <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="edificio" name="edificio"
+                                                required value="[Exemplo] Edifício A">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="piso" class="form-label fw-bold">Piso</label>
+                                            <input type="text" class="form-control" id="piso" name="piso"
+                                                value="[Exemplo] 1º Andar">
+                                        </div>
+
+                                        <div class="col-md-6 mt-4">
+                                            <label for="servico_departamento" class="form-label fw-bold">Serviço /
+                                                Departamento <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="servico_departamento"
+                                                name="servico_departamento" required
+                                                value="[Exemplo] Serviço de Informática">
+                                        </div>
+
+                                        <div class="col-md-6 mt-4">
+                                            <label for="sala_gabinete" class="form-label fw-bold">Sala /
+                                                Gabinete</label>
+                                            <input type="text" class="form-control" id="sala_gabinete"
+                                                name="sala_gabinete" value="[Exemplo] Sala 101">
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5 text-end">
+                                        <a href="index.html" class="btn btn-outline-secondary me-2">Cancelar</a>
+                                        <button type="submit" class="btn btn-warning fw-bold">Atualizar
+                                            Localização</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.getElementById("menu-toggle").addEventListener("click", function (e) {
+                e.preventDefault();
+                document.getElementById("sidebar-wrapper").classList.toggle("collapsed");
+            });
+        </script>
+
+</body>
+
+</html>
