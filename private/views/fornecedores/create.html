@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="../../assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <nav id="top-navbar" class="navbar colour-primary fixed-top">
+        <div class="container-fluid">
+            <span class="navbar-brand text-light fw-bold m-0" id="menu-toggle"
+                title="Clique para esconder/mostrar o menu">
+                Dashboard
+            </span>
+        </div>
+    </nav>
+
+    <div id="wrapper">
+        <aside id="sidebar-wrapper" class="text-light shadow d-flex flex-column"
+            style="min-height: calc(100vh - 60px);">
+
+            <div class="p-3 border-bottom border-secondary text-center mt-2">
+                <small class="d-block text-light">Bem-vindo(a),</small>
+                <strong>username</strong>
+                <span class="badge bg-secondary d-block mt-2">ADMIN</span>
+            </div>
+
+            <div class="list-group list-group-flush mt-2 flex-grow-1">
+                <a href="dashboard.html" class="list-group-item text-light p-3 border-0">📊Dashboard</a>
+                <a href="views/equipamentos/index.html" class="list-group-item text-light p-3 border-0">🩺
+                    Equipamentos</a>
+                <a href="views/localizacoes/index.html" class="list-group-item text-light p-3 border-0">📍
+                    Localizações</a>
+                <a href="views/fornecedores/index.html" class="list-group-item text-light p-3 border-0">🏢
+                    Fornecedores</a>
+                <a href="#" class="list-group-item p-3 border-0 text-warning">⚙️ Gerir Utilizadores [ADMIN]</a>
+            </div>
+
+            <div class="list-group list-group-flush p-3 border-top border-secondary">
+                <a href="../public/index.html" class="text-light text-decoration-none">Sair</a>
+            </div>
+
+        </aside>
+
+        <main id="page-content-wrapper">
+            <div class="container-fluid">
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="text-secondary">🏢 Novo Fornecedor</h2>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-10 mx-auto">
+
+                        <div class="alert alert-danger shadow-sm">
+                            Erro ao registar fornecedor
+                        </div>
+
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header bg-white">
+                                <h5 class="mb-0 mt-2">Dados da Entidade</h5>
+                            </div>
+                            <div class="card-body bg-light">
+
+                                <form action="create" method="POST">
+
+                                    <h6 class="text-primary mb-3">Informação Principal</h6>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-6">
+                                            <label for="nome_empresa" class="form-label fw-bold">Nome da Empresa <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="nome_empresa"
+                                                name="nome_empresa" required
+                                                value="[exemplo: Empresa XYZ]">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="nif" class="form-label fw-bold">NIF</label>
+                                            <input type="text" class="form-control" id="nif" name="nif" maxlength="20"
+                                                value="[exemplo: 123456789]">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="tipo_fornecedor" class="form-label fw-bold">Tipo de
+                                                Entidade</label>
+                                            <select class="form-select" id="tipo_fornecedor" name="tipo_fornecedor">
+                                                <option value="">Selecione...</option>
+                                                <option value="Fabricante">Fabricante</option>
+                                                <option value="Distribuidor/Comercial">Distribuidor / Comercial</option>
+                                                <option value="Assistência Técnica">Assistência Técnica</option>
+                                                <option value="Fornecedor de Consumíveis">Fornecedor de Consumíveis</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <h6 class="text-primary mb-3 border-top pt-4">Contactos e Localização</h6>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-4">
+                                            <label for="contacto_telefonico" class="form-label fw-bold">Telefone
+                                                Geral</label>
+                                            <input type="text" class="form-control" id="contacto_telefonico"
+                                                name="contacto_telefonico"
+                                                value="[exemplo: 912345678]">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="email" class="form-label fw-bold">Email Geral</label>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                value="[exemplo: email@empresa.com]">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="website" class="form-label fw-bold">Website</label>
+                                            <input type="url" class="form-control" id="website" name="website"
+                                                placeholder="https://"
+                                                value="[exemplo: https://www.empresa.com]">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="morada" class="form-label fw-bold">Morada Completa</label>
+                                            <input type="text" class="form-control" id="morada" name="morada"
+                                                value="[morada completa: rua, número, cidade, código postal]">
+                                        </div>
+                                    </div>
+
+                                    <h6 class="text-primary mb-3 border-top pt-4">Pessoa de Contacto Direto</h6>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-6">
+                                            <label for="pessoa_contacto" class="form-label fw-bold">Nome do
+                                                Contacto</label>
+                                            <input type="text" class="form-control" id="pessoa_contacto"
+                                                name="pessoa_contacto"
+                                                value="[contacto direto: nome completo]">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="telefone_contacto" class="form-label fw-bold">Telefone
+                                                Direto</label>
+                                            <input type="text" class="form-control" id="telefone_contacto"
+                                                name="telefone_contacto"
+                                                value="[exemplo: 912345678]">
+                                        </div>
+                                    </div>
+
+                                    <h6 class="text-primary mb-3 border-top pt-4">Informação Adicional</h6>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-12">
+                                            <label for="observacoes" class="form-label fw-bold">Observações</label>
+                                            <textarea class="form-control" id="observacoes" name="observacoes"
+                                                rows="3">[observações]</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5 text-end border-top pt-4">
+                                        <a href="index.php" class="btn btn-outline-secondary me-2">Cancelar</a>
+                                        <button type="submit" class="btn btn-primary fw-bold">Registar
+                                            Fornecedor</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.getElementById("menu-toggle").addEventListener("click", function (e) {
+                e.preventDefault();
+                document.getElementById("sidebar-wrapper").classList.toggle("collapsed");
+            });
+        </script>
+
+</body>
+
+</html>
