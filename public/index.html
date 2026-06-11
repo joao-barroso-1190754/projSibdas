@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedTech Solutions</title>
+    <link href="assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top colour-primary text-light">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-light" href="#">MedTech Solutions</a>
+            <div>
+                <ul class="navbar-nav">
+                    <li><a class="nav-link text-light" href="#inicio">Início</a></li>
+                    <li><a class="nav-link text-light" href="#sobre">Sobre Nós</a></li>
+                    <li><a class="nav-link text-light" href="#contato">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="loginDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Area Privada
+                    <img src="assets/images/usr.png" alt="Login" width="20">
+                </button>
+                <div class="dropdown-menu dropdown-menu-end p-4 shadow" style="width: 300px;"
+                    aria-labelledby="loginDropdown">
+                    <h5 class="mb-3">Login no Sistema</h5>
+
+                    <div class="alert alert-danger py-1 px-2" role="alert">
+                        <a>ERRO DE SESSÃO (placeholder)</a>
+                    </div>
+
+                    <form action="login" method="POST">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content container text-center">
+        <section id="inicio" class="mb-4">
+            <h1 class="display-4 fw-bold">Bem-vindo à MedTech Solutions</h1>
+            <p class="lead text-muted">Inovação em saúde para um futuro melhor.</p>
+        </section>
+
+        <section id="sobre">
+            <h2 class="text-primary mb-4">Sobre Nós</h2>
+            <p class="text-muted">Conheça mais sobre a MedTech Solutions e nosso compromisso com a inovação em saúde.</p>
+        </section>
+
+        <section id="contato">
+            <h2 class="text-primary mb-4">Contato</h2>
+            <p class="text-muted">Entre em contato conosco para mais informações.</p>
+        </section>
+    </main>
+
+    <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
