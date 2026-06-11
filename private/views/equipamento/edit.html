@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="../../assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <nav id="top-navbar" class="navbar fixed-top navbar-expand-lg bg-primary shadow">
+        <div class="container-fluid">
+            <span class="navbar-brand text-light fw-bold m-0" id="menu-toggle"
+                title="Clique para esconder/mostrar o menu">
+                Dashboard
+            </span>
+        </div>
+    </nav>
+
+    <div id="wrapper">
+        <aside id="sidebar-wrapper" class="text-light shadow d-flex flex-column"
+            style="min-height: calc(100vh - 60px);">
+
+            <div class="p-3 border-bottom border-secondary text-center mt-2">
+                <small class="d-block text-light">Bem-vindo(a),</small>
+                <strong>username</strong>
+                <span class="badge bg-secondary d-block mt-2">ADMIN</span>
+            </div>
+
+            <div class="list-group list-group-flush mt-2 flex-grow-1">
+                <a href="dashboard.html" class="list-group-item text-light p-3 border-0">📊Dashboard</a>
+                <a href="views/equipamentos/index.html" class="list-group-item text-light p-3 border-0">🩺
+                    Equipamentos</a>
+                <a href="views/localizacoes/index.html" class="list-group-item text-light p-3 border-0">📍
+                    Localizações</a>
+                <a href="views/fornecedores/index.html" class="list-group-item text-light p-3 border-0">🏢
+                    Fornecedores</a>
+                <a href="#" class="list-group-item p-3 border-0 text-warning">⚙️ Gerir Utilizadores [ADMIN]</a>
+            </div>
+
+            <div class="list-group list-group-flush p-3 border-top border-secondary">
+                <a href="../public/index.html" class="text-light text-decoration-none">Sair</a>
+            </div>
+
+        </aside>
+
+        <main id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="text-secondary">🩺 Editar Equipamento</h2>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-10 mx-auto">
+                        <div class="alert alert-danger shadow-sm">
+                            Erro Sample
+                        </div>
+
+                        <div class="card shadow-sm border-0 mb-5">
+                            <div class="card-body bg-light p-4">
+
+                                <form action="edit.php" method="POST">
+                                    <input type="hidden" name="id" value="exemplo id">
+
+                                    <h5 class="text-primary border-bottom pb-2 mb-4">Identificação Técnica</h5>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-3">
+                                            <label class="form-label fw-bold">Código Interno <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="codigo_interno" required
+                                                value="exemplo código interno">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="form-label fw-bold">Designação <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="designacao" required
+                                                value="exemplo designacao">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-bold">Categoria</label>
+                                            <select class="form-select" name="categoria">
+                                                <option value="">Selecione...</option>
+                                                <option value="Monitorização">Monitorização</option>
+                                                <option value="Suporte de Vida">Suporte de Vida</option>
+                                                <option value="Laboratório">Laboratório</option>
+                                                <option value="Reagente/Consumível"
+                                                    >Reagente/Consumível</option>
+                                                <option value="Acessório/Componente"
+                                                    >Acessório/Componente</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-bold">Marca</label>
+                                            <input type="text" class="form-control" name="marca"
+                                                value="exemplo marca">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-bold">Modelo</label>
+                                            <input type="text" class="form-control" name="modelo"
+                                                value="exemplo modelo">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-bold">Número de Série</label>
+                                            <input type="text" class="form-control" name="numero_serie"
+                                                value="exemplo número de série">
+                                        </div>
+                                    </div>
+
+                                    <h5 class="text-primary border-bottom pb-2 mb-4 mt-5">Hierarquia e Operação</h5>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label fw-bold text-muted">Item Principal (Se for
+                                                componente)</label>
+                                            <select class="form-select" name="parent_id">
+                                                <option value="">Não aplicável</option>
+                                                
+                                                <option value="exemplo parent id">
+                                                    exemplo código interno - exemplo designação
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-bold">Estado Atual <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select" name="estado" required>
+                                                <option value="Ativo">Ativo</option>
+                                                <option value="Em manutenção">Em manutenção</option>
+                                                <option value="Inativo">Inativo</option>
+                                                <option value="Abatido">Abatido</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-bold">Criticidade</label>
+                                            <select class="form-select" name="criticidade">
+                                                <option value="Baixa">Baixa</option>
+                                                <option value="Média">Média</option>
+                                                <option value="Alta">Alta</option>
+                                                <option value="Suporte de vida">Suporte de vida</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-bold">Localização Atual <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select" name="localizacao_id" required>
+                                                <option value="exemplo localizacao id">
+                                                    exemplo edificio - exemplo servico_departamento - exemplo sala_gabinete
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <label class="form-label fw-bold">Observações</label>
+                                            <textarea class="form-control" name="observacoes"
+                                                rows="2">['observacoes']</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 text-end">
+                                        <a href="index.html" class="btn btn-outline-secondary me-2">Cancelar</a>
+                                        <button type="submit" class="btn btn-warning fw-bold">Atualizar
+                                            Equipamento</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="assets/sweetalert2/sweetalert2.all.min.js"></script>
+        <script src="assets/js/1190754.js">
+        </script>
+
+</body>
+
+</html>
