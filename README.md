@@ -1,3 +1,8 @@
+WIP:
+Ver se inetracao entre delete loc. e equipamentos apagados (hidden)
+Criar outros tipos de utilizador para alem de normal e admin (i.e. tecnico)
+
+
 Re-upload do projecto para o Git do email institucional. 
 
 
