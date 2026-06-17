@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    header("Location: ../backoffice/dashboard.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -25,18 +32,19 @@
             <div class="dropdown">
                 <button class="btn btn-outline-light dropdown-toggle" type="button" id="loginDropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    Area Privada
-                    <img src="assets/images/usr.png" alt="Login" width="20">
+                    Acesso Hospital
                 </button>
                 <div class="dropdown-menu dropdown-menu-end p-4 shadow" style="width: 300px;"
                     aria-labelledby="loginDropdown">
                     <h5 class="mb-3">Login no Sistema</h5>
 
+                    <?php if(isset($_SESSION['login_error'])): ?>
                     <div class="alert alert-danger py-1 px-2" role="alert">
-                        <a>ERRO DE SESSÃO (placeholder)</a>
+                        <?= $_SESSION['login_error']; unset($_SESSION['login_error']); ?>
                     </div>
+                    <?php endif; ?>
 
-                    <form action="login" method="POST">
+                    <form action="../login/login_process.php" method="POST">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required>
@@ -45,7 +53,7 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        <button type="submit" class="btn btn-primary w-100">Entrar no Back Office</button>
                     </form>
                 </div>
             </div>
@@ -83,7 +91,7 @@
                 </div>
             </div>
         </section>
-<!--puta que pariu agr os commits estao em portugues e ingles, lets fucking go-->
+        <!--puta que pariu agr os commits estao em portugues e ingles, lets fucking go-->
         <section id="solucoes" class="mb-5 pb-5 border-bottom text-center">
             <h2 class="text-primary mb-4">Nossas Soluções</h2>
             <p class="text-muted mb-5">Tecnologia de ponta para resolver os maiores gargalos da engenharia clínica.</p>
