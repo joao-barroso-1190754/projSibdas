@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../../includes/header.php';
-require_once __DIR__ . '/../../includes/sidebar.php';
+require_once private_root . 'includes/header.php';
+require_once private_root . 'includes/sidebar.php';
 
 try {
     $stmt = $pdo->query("SELECT * FROM localizacoes ORDER BY edificio, servico_departamento");
@@ -95,5 +95,5 @@ try {
     </div>
 
     <?php
-require_once __DIR__ . '/../../includes/footer.php';
+require_once private_root . 'includes/footer.php';
 ?>

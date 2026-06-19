@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-require_once __DIR__ . '/../../config/db_connect.php';
+require_once private_root . 'config/db_connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ require_once __DIR__ . '/../../config/db_connect.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?APP_NAME?></title>
+    <title><?php echo APP_NAME; ?></title>
     <link href="/PROJECTO/private/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/PROJECTO/private/assets/css/styles.css" rel="stylesheet">
     <link href="/PROJECTO/private/assets/fontawesome/fontawesome.min.css" rel="stylesheet">
