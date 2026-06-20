@@ -17,20 +17,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_nome'] = $user['nome'];
             $_SESSION['user_perfil'] = $user['perfil'];
 
-            header("Location: ../backoffice/dashboard.php");
+            header("Location: ../private/dashboard.php");
             exit;
         } else {
             $_SESSION['login_error'] = "Credenciais inválidas.";
-            header("Location: ../frontoffice/index.php"); 
+            header("Location: ../public/index.php"); 
             exit;
         }
     } catch (PDOException $e) {
         $_SESSION['login_error'] = "Erro no sistema: " . $e->getMessage();
-        header("Location: ../frontoffice/index.php"); 
+        header("Location: ../public/index.php"); 
         exit;
     }
 } else {
-    header("Location: ../frontoffice/index.php"); 
+    header("Location: ../public/index.php"); 
     exit;
 }
 ?>

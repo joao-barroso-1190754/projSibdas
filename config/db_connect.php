@@ -1,5 +1,7 @@
 <?php
 
+require_once 'config.php';
+
 $host = 'vsgate-s1.dei.isep.ipp.pt:10464';
 $db_name = 'db1190754';
 $username = '1190754'; 
@@ -12,4 +14,3 @@ try {
 } catch(PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-?>

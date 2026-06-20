@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['user_id'])) {
-    header("Location: ../backoffice/dashboard.php");
+    header("Location: ../private/dashboard.php");
     exit;
 }
 ?>
