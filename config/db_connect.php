@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php';
+require_once __DIR__ . '/config.php';
 
 $host = 'vsgate-s1.dei.isep.ipp.pt:10464';
 $db_name = 'db1190754';
