@@ -4,7 +4,7 @@ require_once private_root . 'includes/header.php';
 require_once private_root . 'includes/sidebar.php';
 
 try {
-    $stmt = $pdo->query("SELECT * FROM localizacoes ORDER BY edificio, servico_departamento");
+    $stmt = $pdo->query("SELECT * FROM localizacoes WHERE apagado = FALSE ORDER BY edificio, servico_departamento");
     $localizacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $error_msg = "Erro ao carregar localizações: " . $e->getMessage();
@@ -22,24 +22,25 @@ try {
 </div>
 
 <?php if (isset($error_msg)): ?>
-<div class="alert alert-danger">
-    <?= $error_msg; ?>
-</div>
+    <div class="alert alert-danger">
+        <?= $error_msg; ?>
+    </div>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['error_msg'])): ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <?= $_SESSION['error_msg']; unset($_SESSION['error_msg']); ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= $_SESSION['error_msg'];
+        unset($_SESSION['error_msg']); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['success_msg'])): ?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <?= $_SESSION['success_msg'];
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= $_SESSION['success_msg'];
         unset($_SESSION['success_msg']); ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 <?php endif; ?>
 
 <div class="card shadow-sm border-0">
@@ -57,37 +58,37 @@ try {
                 </thead>
                 <tbody>
                     <?php if (empty($localizacoes)): ?>
-                    <tr>
-                        <td colspan="6" class="text-center py-4 text-muted">Nenhuma localização registada no sistema.
-                        </td>
-                    </tr>
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">Nenhuma localização registada no sistema.
+                            </td>
+                        </tr>
                     <?php else: ?>
-                    <?php foreach ($localizacoes as $loc): ?>
-                    <tr>
-                        <td>
-                            <?= htmlspecialchars($loc['id']); ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($loc['edificio']); ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($loc['piso']); ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($loc['servico_departamento']); ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($loc['sala_gabinete']); ?>
-                        </td>
-                        <td class="text-center">
-                            <a href="edit.php?id=<?= $loc['id']; ?>" class="btn btn-sm btn-outline-warning">Editar</a>
-                            <form action="delete.php" method="POST" class="d-inline delete-form">
-                                <input type="hidden" name="id" value="<?= $loc['id']; ?>">
-                                <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
-                            </form>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
+                        <?php foreach ($localizacoes as $loc): ?>
+                            <tr>
+                                <td>
+                                    <?= htmlspecialchars($loc['id']); ?>
+                                </td>
+                                <td>
+                                    <?= htmlspecialchars($loc['edificio']); ?>
+                                </td>
+                                <td>
+                                    <?= htmlspecialchars($loc['piso']); ?>
+                                </td>
+                                <td>
+                                    <?= htmlspecialchars($loc['servico_departamento']); ?>
+                                </td>
+                                <td>
+                                    <?= htmlspecialchars($loc['sala_gabinete']); ?>
+                                </td>
+                                <td class="text-center">
+                                    <a href="edit.php?id=<?= $loc['id']; ?>" class="btn btn-sm btn-outline-warning">Editar</a>
+                                    <form action="delete.php" method="POST" class="d-inline delete-form">
+                                        <input type="hidden" name="id" value="<?= $loc['id']; ?>">
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </tbody>
             </table>
@@ -95,5 +96,5 @@ try {
     </div>
 
     <?php
-require_once private_root . 'includes/footer.php';
-?>
+    require_once private_root . 'includes/footer.php';
+    ?>

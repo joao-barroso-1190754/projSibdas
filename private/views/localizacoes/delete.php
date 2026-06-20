@@ -13,10 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     $id = $_POST['id'];
 
     try {
-        $stmt = $pdo->prepare("DELETE FROM localizacoes WHERE id = :id");
+        $stmt = $pdo->prepare("UPDATE localizacoes SET apagado = TRUE WHERE id = :id");
+        $stmt->execute([':id' => $id]);
         $stmt->execute([':id' => $id]);
         $_SESSION['success_msg'] = "Localização removida com sucesso!";
-        
+
     } catch (PDOException $e) {
         if ($e->getCode() == 23000) {
             $_SESSION['error_msg'] = "Não é possível remover esta localização porque existem equipamentos registados nela.";
