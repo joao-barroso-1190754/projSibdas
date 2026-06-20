@@ -1,8 +1,14 @@
-:root { /* altera as cores do BS para as do "tema" escolhido */
+:root {
+    /* altera as cores do BS para as do "tema" escolhido */
     --text: #070b0b;
     --background: #fafcfc;
     --primary: #46c0b9;
     --secondary: #91d5d2;
     --accent: #67d0cb;
+
+    --bs-primary: var(--primary);
+    --bs-primary-rgb: 70, 192, 185;
+    --bs-secondary: var(--secondary);
+    --bs-body-bg: var(--background);
+    --bs-body-color: var(--text);
 }
-    

@@ -1,9 +1,16 @@
-:root{ /*em caso de duvida ver explicacao na stylesheet do /public */
-    --text: #070b0b;
-    --background: #FAF9F6 ;
-    --primary: #46c0b9;
-    --secondary: #91d5d2;
-    --accent: #67d0cb;
+:root {
+  /*em caso de duvida ver explicacao na stylesheet do /public */
+  --text: #070b0b;
+  --background: #FAF9F6;
+  --primary: #46c0b9;
+  --secondary: #91d5d2;
+  --accent: #67d0cb;
+
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 70, 192, 185;
+  --bs-secondary: var(--secondary);
+  --bs-body-bg: var(--background);
+  --bs-body-color: var(--text);
 }
 
 body {
@@ -20,6 +27,7 @@ body {
   transition: opacity 0.2s ease-in-out;
   user-select: none;
 }
+
 #menu-toggle:hover {
   opacity: 0.75;
 }
@@ -33,7 +41,7 @@ body {
 #sidebar-wrapper {
   min-width: 250px;
   max-width: 250px;
-  background-color: var(--bs-dark); 
+  background-color: var(--bs-secondary);
   height: calc(100vh - 60px);
   position: fixed;
   left: 0;
@@ -50,17 +58,17 @@ body {
 #page-content-wrapper {
   width: 100%;
   padding: 20px;
-  margin-left: 250px; 
+  margin-left: 250px;
   transition: margin 0.25s ease-out;
 }
 
-#sidebar-wrapper.collapsed ~ #page-content-wrapper {
+#sidebar-wrapper.collapsed~#page-content-wrapper {
   margin-left: 0;
 }
 
 #sidebar-wrapper .list-group-item {
   background-color: transparent;
-  color: rgba(255, 255, 255, 0.75); 
+  color: rgba(255, 255, 255, 0.75);
   border: none;
   text-align: center;
   font-size: 1.1rem;
