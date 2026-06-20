@@ -66,9 +66,6 @@ try {
                         <?php foreach ($localizacoes as $loc): ?>
                             <tr>
                                 <td>
-                                    <?= htmlspecialchars($loc['id']); ?>
-                                </td>
-                                <td>
                                     <?= htmlspecialchars($loc['edificio']); ?>
                                 </td>
                                 <td>

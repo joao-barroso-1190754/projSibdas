@@ -1,18 +1,14 @@
 <?php
-// backoffice/views/equipamentos/create.php
 
 require_once __DIR__ . '/../../includes/header.php'; 
 require_once __DIR__ . '/../../includes/sidebar.php';
 
 $error_msg = null;
 
-// 1. PRE-LOAD DATA FOR DROPDOWNS
 try {
-    // Get all active locations
     $stmtLoc = $pdo->query("SELECT id, edificio, servico_departamento, sala_gabinete FROM localizacoes WHERE apagado = FALSE ORDER BY edificio, servico_departamento");
     $localizacoes = $stmtLoc->fetchAll(PDO::FETCH_ASSOC);
 
-    // Get all active equipment (to act as "parents" for components)
     $stmtEq = $pdo->query("SELECT id, codigo_interno, designacao FROM equipamentos WHERE apagado = FALSE ORDER BY codigo_interno");
     $equipamentos_principais = $stmtEq->fetchAll(PDO::FETCH_ASSOC);
 
@@ -20,10 +16,8 @@ try {
     $error_msg = "Erro ao carregar dados de suporte: " . $e->getMessage();
 }
 
-// 2. PROCESS FORM SUBMISSION
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Sanitize basic inputs
     $codigo = trim($_POST['codigo_interno']);
     $designacao = trim($_POST['designacao']);
     $categoria = trim($_POST['categoria']);
@@ -34,14 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $criticidade = trim($_POST['criticidade']);
     $localizacao_id = $_POST['localizacao_id'];
     
-    // Handle optional fields correctly (convert empty strings to NULL for the database)
     $parent_id = !empty($_POST['parent_id']) ? $_POST['parent_id'] : null;
     $ano_fabrico = !empty($_POST['ano_fabrico']) ? $_POST['ano_fabrico'] : null;
     $custo = !empty($_POST['custo_aquisicao']) ? $_POST['custo_aquisicao'] : null;
     $data_aquisicao = !empty($_POST['data_aquisicao']) ? $_POST['data_aquisicao'] : null;
     $observacoes = trim($_POST['observacoes']);
 
-    // Mandatory fields check
     if (empty($codigo) || empty($designacao) || empty($estado) || empty($localizacao_id)) {
         $error_msg = "Por favor, preencha todos os campos obrigatórios (*).";
     } else {
@@ -135,7 +127,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Marca</label>
-                            <input type="text" class="form-control" name="marca" value="<?= htmlspecialchars($_POST['marca'] ?? '') ?>">
+                            <select class="form-select" name="localizacao_id" required>
+                                <option value="">Selecione...</option>
+                                <?php foreach ($localizacoes as $loc): ?>
+                                    <option value="<?= $loc['id'] ?>">
+                                        <?= htmlspecialchars($loc['marca']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Modelo</label>

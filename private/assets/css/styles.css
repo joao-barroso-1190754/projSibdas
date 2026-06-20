@@ -1,13 +1,13 @@
 :root {
   /*em caso de duvida ver explicacao na stylesheet do /public */
-  --text: #070b0b;
+--text: #070b0b;
   --background: #FAF9F6;
-  --primary: #46c0b9;
-  --secondary: #91d5d2;
-  --accent: #67d0cb;
+  --primary: #0f6e56;
+  --secondary: #5dcaa5;
+  --accent: #d97a4a;
 
   --bs-primary: var(--primary);
-  --bs-primary-rgb: 70, 192, 185;
+  --bs-primary-rgb: 15, 110, 86;
   --bs-secondary: var(--secondary);
   --bs-body-bg: var(--background);
   --bs-body-color: var(--text);
@@ -75,8 +75,8 @@ body {
 }
 
 #sidebar-wrapper .list-group-item.active {
-  background-color: var(--bs-light);
-  color: var(--bs-dark);
+  background-color: var(--accent);
+  color: #fff;
   border: none;
   text-align: center;
   font-size: 1.1rem;

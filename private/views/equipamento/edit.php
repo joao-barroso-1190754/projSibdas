@@ -132,7 +132,13 @@ if (!$eq && !isset($error_msg)) { echo "<script>window.location.href='index.php'
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Marca</label>
-                            <input type="text" class="form-control" name="marca" value="<?= htmlspecialchars($eq['marca'] ?? ''); ?>">
+                            <select class="form-select" name="localizacao_id" required>
+                                <option value="">Selecione...</option>
+                                <?php foreach ($localizacoes as $loc): ?>
+                                    <option value="<?= $loc['id'] ?>">
+                                        <?= htmlspecialchars($loc['marca']) ?>
+                                    </option>
+                                <?php endforeach; ?>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Modelo</label>

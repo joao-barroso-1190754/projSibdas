@@ -27,7 +27,7 @@
 
         <?php if ($_SESSION['user_perfil'] === 'Admin'): ?>
             <a href="<?= BASE_URL ?>/private/views/users/index.php"
-                class="list-group-item list-group-item-dark p-3 border-0 text-warning">
+                class="list-group-item list-group-item-dark p-3 border-0">
                 <i class="fa-solid fa-users me-2"></i> Gerir Utilizadores
             </a>
         <?php endif; ?>
