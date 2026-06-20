@@ -1,38 +1,35 @@
 <?php
-// private/views/equipamento/index.php
-
+$current_path = $_SERVER['PHP_SELF'];
+function isActive($needle, $path)
+{
+    return str_contains($path, $needle) ? 'active' : '';
+}
 require_once __DIR__ . '/../../includes/header.php';
 require_once __DIR__ . '/../../includes/sidebar.php';
 
-// 1. Initialize variables for our search form to keep it "sticky"
 $search_text = $_GET['pesquisa'] ?? '';
 $search_estado = $_GET['estado'] ?? '';
 $search_crit = $_GET['criticidade'] ?? '';
 
 try {
-    // 2. Build the Dynamic SQL Query
     $where_clauses = ["e.apagado = FALSE"];
     $params = [];
 
-    // If the user typed text, search Code, Name, or Brand
     if (!empty($search_text)) {
         $where_clauses[] = "(e.codigo_interno LIKE :text OR e.designacao LIKE :text OR e.marca LIKE :text)";
         $params[':text'] = '%' . $search_text . '%';
     }
 
-    // If the user selected a specific state
     if (!empty($search_estado)) {
         $where_clauses[] = "e.estado = :estado";
         $params[':estado'] = $search_estado;
     }
 
-    // If the user selected a specific criticality
     if (!empty($search_crit)) {
         $where_clauses[] = "e.criticidade = :crit";
         $params[':crit'] = $search_crit;
     }
 
-    // Combine all conditions with "AND"
     $where_sql = implode(' AND ', $where_clauses);
 
     $sql = "SELECT e.id, e.codigo_interno, e.designacao, e.marca, e.modelo, e.estado, e.criticidade, l.servico_departamento 
@@ -143,76 +140,89 @@ function getCriticidadeBadge($criticidade)
     </div>
 </div>
 
-<div class="card shadow-sm border-0">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover table-striped m-0">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Código</th>
-                        <th>Designação</th>
-                        <th>Marca / Modelo</th>
-                        <th>Serviço Atual</th>
-                        <th>Criticidade</th>
-                        <th>Estado</th>
-                        <th class="text-center">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (empty($equipamentos)): ?>
+<div class="card border-0">
+    <div class="d-flex justify-content-end mb-2">
+        <a href="export_csv.php" class="btn btn-sm btn-success me-2 shadow-sm">
+            <i class="fa-solid fa-file-csv me-1"></i> Exportar CSV
+        </a>
+
+        <button onclick="exportarPDF()" class="btn btn-sm btn-danger shadow-sm">
+            <i class="fa-solid fa-file-pdf me-1"></i> Exportar PDF
+        </button>
+    </div>
+
+    <div class="card shadow-sm border-0" id="tabela-inventario">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped m-0">
+                    <thead class="table-dark">
                         <tr>
-                            <td colspan="7" class="text-center py-4 text-muted">
-                                Nenhum equipamento encontrado com os filtros atuais.
-                                <?php if (!empty($search_text) || !empty($search_estado)): ?>
-                                    <br><a href="index.php" class="btn btn-sm btn-outline-secondary mt-2">Limpar Filtros</a>
-                                <?php endif; ?>
-                            </td>
+                            <th>Código</th>
+                            <th>Designação</th>
+                            <th>Marca / Modelo</th>
+                            <th>Serviço Atual</th>
+                            <th>Criticidade</th>
+                            <th>Estado</th>
+                            <th class="text-center">Ações</th>
                         </tr>
-                    <?php else: ?>
-                        <?php foreach ($equipamentos as $eq): ?>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($equipamentos)): ?>
                             <tr>
-                                <td class="fw-bold text-primary"><?= htmlspecialchars($eq['codigo_interno']); ?></td>
-                                <td><?= htmlspecialchars($eq['designacao']); ?></td>
-                                <td>
-                                    <?= htmlspecialchars($eq['marca']); ?><br>
-                                    <small class="text-muted"><?= htmlspecialchars($eq['modelo']); ?></small>
-                                </td>
-                                <td><?= htmlspecialchars($eq['servico_departamento'] ?? 'Sem Localização'); ?></td>
-                                <td><span
-                                        class="badge <?= getCriticidadeBadge($eq['criticidade']); ?>"><?= htmlspecialchars($eq['criticidade']); ?></span>
-                                </td>
-                                <td><span
-                                        class="badge <?= getEstadoBadge($eq['estado']); ?>"><?= htmlspecialchars($eq['estado']); ?></span>
-                                </td>
-                                <td class="text-center align-middle">
-
-                                    <?php if ($_SESSION['user_perfil'] === 'Normal'): ?>
-                                        <?php if ($eq['estado'] !== 'Em manutenção' && $eq['estado'] !== 'Abatido'): ?>
-                                            <form action="report.php" method="POST" class="d-inline report-form">
-                                                <input type="hidden" name="id" value="<?= $eq['id']; ?>">
-                                                <button type="button" class="btn btn-sm btn-outline-danger btn-report">Reportar
-                                                    Avaria</button>
-                                            </form>
-                                        <?php else: ?>
-                                            <span class="text-muted small">Em intervenção</span>
-                                        <?php endif; ?>
-
-                                    <?php else: ?>
-                                        <a href="edit.php?id=<?= $eq['id']; ?>" class="btn btn-sm btn-outline-warning">Editar</a>
-                                        <form action="delete.php" method="POST" class="d-inline delete-form">
-                                            <input type="hidden" name="id" value="<?= $eq['id']; ?>">
-                                            <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
-                                        </form>
+                                <td colspan="7" class="text-center py-4 text-muted">
+                                    Nenhum equipamento encontrado com os filtros atuais.
+                                    <?php if (!empty($search_text) || !empty($search_estado)): ?>
+                                        <br><a href="index.php" class="btn btn-sm btn-outline-secondary mt-2">Limpar Filtros</a>
                                     <?php endif; ?>
-
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                        <?php else: ?>
+                            <?php foreach ($equipamentos as $eq): ?>
+                                <tr>
+                                    <td class="fw-bold text-primary"><?= htmlspecialchars($eq['codigo_interno']); ?></td>
+                                    <td><?= htmlspecialchars($eq['designacao']); ?></td>
+                                    <td>
+                                        <?= htmlspecialchars($eq['marca']); ?><br>
+                                        <small class="text-muted"><?= htmlspecialchars($eq['modelo']); ?></small>
+                                    </td>
+                                    <td><?= htmlspecialchars($eq['servico_departamento'] ?? 'Sem Localização'); ?></td>
+                                    <td><span
+                                            class="badge <?= getCriticidadeBadge($eq['criticidade']); ?>"><?= htmlspecialchars($eq['criticidade']); ?></span>
+                                    </td>
+                                    <td><span
+                                            class="badge <?= getEstadoBadge($eq['estado']); ?>"><?= htmlspecialchars($eq['estado']); ?></span>
+                                    </td>
+                                    <td class="text-center align-middle">
+
+                                        <?php if ($_SESSION['user_perfil'] === 'Normal'): ?>
+                                            <?php if ($eq['estado'] !== 'Em manutenção' && $eq['estado'] !== 'Abatido'): ?>
+                                                <form action="report.php" method="POST" class="d-inline report-form">
+                                                    <input type="hidden" name="id" value="<?= $eq['id']; ?>">
+                                                    <button type="button" class="btn btn-sm btn-outline-danger btn-report">Reportar
+                                                        Avaria</button>
+                                                </form>
+                                            <?php else: ?>
+                                                <span class="text-muted small">Em intervenção</span>
+                                            <?php endif; ?>
+
+                                        <?php else: ?>
+                                            <a href="edit.php?id=<?= $eq['id']; ?>"
+                                                class="btn btn-sm btn-outline-warning">Editar</a>
+                                            <form action="delete.php" method="POST" class="d-inline delete-form">
+                                                <input type="hidden" name="id" value="<?= $eq['id']; ?>">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
+                                            </form>
+                                        <?php endif; ?>
+
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
+    <?php require_once __DIR__ . '/../../includes/footer.php'; ?>

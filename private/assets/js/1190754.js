@@ -48,3 +48,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function exportarPDF() {
+    const element = document.getElementById('tabela-inventario');
+    
+    const opt = {
+        margin:       10,
+        filename:     'Inventario_Equipamentos.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+    };
+
+    const acoesCells = element.querySelectorAll('th:last-child, td:last-child');
+    acoesCells.forEach(cell => cell.style.display = 'none');
+
+    html2pdf().set(opt).from(element).save().then(() => {
+        acoesCells.forEach(cell => cell.style.display = '');
+    });
+}

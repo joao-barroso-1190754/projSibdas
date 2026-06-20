@@ -1,5 +1,8 @@
 <?php
-
+$current_path = $_SERVER['PHP_SELF']; 
+function isActive($needle, $path) {
+    return str_contains($path, $needle) ? 'active' : '';
+}
 require_once __DIR__ . '/../../includes/header.php'; 
 
 if ($_SESSION['user_perfil'] !== 'Admin') {

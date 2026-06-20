@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../includes/header.php'; 
+require_once __DIR__ . '/../../includes/header.php';
 require_once __DIR__ . '/../../includes/sidebar.php';
 
 $error_msg = null;
@@ -8,6 +8,9 @@ $error_msg = null;
 try {
     $stmtLoc = $pdo->query("SELECT id, edificio, servico_departamento, sala_gabinete FROM localizacoes WHERE apagado = FALSE ORDER BY edificio, servico_departamento");
     $localizacoes = $stmtLoc->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmtForn = $pdo->query("SELECT id, nome_empresa FROM fornecedores WHERE apagado = FALSE ORDER BY nome_empresa");
+    $fornecedores = $stmtForn->fetchAll(PDO::FETCH_ASSOC);
 
     $stmtEq = $pdo->query("SELECT id, codigo_interno, designacao FROM equipamentos WHERE apagado = FALSE ORDER BY codigo_interno");
     $equipamentos_principais = $stmtEq->fetchAll(PDO::FETCH_ASSOC);
@@ -17,7 +20,7 @@ try {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     $codigo = trim($_POST['codigo_interno']);
     $designacao = trim($_POST['designacao']);
     $categoria = trim($_POST['categoria']);
@@ -27,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado = trim($_POST['estado']);
     $criticidade = trim($_POST['criticidade']);
     $localizacao_id = $_POST['localizacao_id'];
-    
+
     $parent_id = !empty($_POST['parent_id']) ? $_POST['parent_id'] : null;
     $ano_fabrico = !empty($_POST['ano_fabrico']) ? $_POST['ano_fabrico'] : null;
     $custo = !empty($_POST['custo_aquisicao']) ? $_POST['custo_aquisicao'] : null;
@@ -42,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     (codigo_interno, designacao, categoria, marca, modelo, numero_serie, data_aquisicao, ano_fabrico, custo_aquisicao, estado, criticidade, observacoes, localizacao_id, parent_id) 
                     VALUES 
                     (:codigo, :desig, :cat, :marca, :modelo, :serial, :data_aq, :ano, :custo, :estado, :crit, :obs, :loc_id, :parent_id)";
-            
+
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 ':codigo' => $codigo,
@@ -62,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ]);
 
             $_SESSION['success_msg'] = "Equipamento/Componente registado com sucesso!";
-            echo "<script>window.location.href='index.php';</script>"; 
+            echo "<script>window.location.href='index.php';</script>";
             exit;
 
         } catch (PDOException $e) {
@@ -92,27 +95,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="row">
     <div class="col-xl-10 mx-auto">
-        
+
         <?php if ($error_msg): ?>
             <div class="alert alert-danger shadow-sm"><?= $error_msg; ?></div>
         <?php endif; ?>
 
         <div class="card shadow-sm border-0 mb-5">
             <div class="card-body bg-light p-4">
-                
+
                 <form action="create.php" method="POST">
-                    
+
                     <h5 class="text-primary border-bottom pb-2 mb-4">1. Identificação Técnica</h5>
                     <div class="row g-3 mb-4">
                         <div class="col-md-3">
                             <label class="form-label fw-bold">Código Interno <span class="text-danger">*</span></label>
                             <input type="text" class="form-control border-primary" name="codigo_interno" required
-                                   placeholder="Ex: EQ-2024-001" value="<?= htmlspecialchars($_POST['codigo_interno'] ?? '') ?>">
+                                placeholder="Ex: EQ-2024-001"
+                                value="<?= htmlspecialchars($_POST['codigo_interno'] ?? '') ?>">
                         </div>
                         <div class="col-md-5">
                             <label class="form-label fw-bold">Designação <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="designacao" required
-                                   placeholder="Ex: Monitor Multiparamétrico" value="<?= htmlspecialchars($_POST['designacao'] ?? '') ?>">
+                                placeholder="Ex: Monitor Multiparamétrico"
+                                value="<?= htmlspecialchars($_POST['designacao'] ?? '') ?>">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Categoria</label>
@@ -127,29 +132,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Marca</label>
-                            <select class="form-select" name="localizacao_id" required>
-                                <option value="">Selecione...</option>
-                                <?php foreach ($localizacoes as $loc): ?>
-                                    <option value="<?= $loc['id'] ?>">
-                                        <?= htmlspecialchars($loc['marca']) ?>
+                            <select class="form-select" name="marca">
+                                <option value="">Selecione a Marca...</option>
+                                <?php foreach ($fornecedores as $forn): ?>
+                                    <option value="<?= htmlspecialchars($forn['nome_empresa']) ?>">
+                                        <?= htmlspecialchars($forn['nome_empresa']) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Modelo</label>
-                            <input type="text" class="form-control" name="modelo" value="<?= htmlspecialchars($_POST['modelo'] ?? '') ?>">
+                            <input type="text" class="form-control" name="modelo"
+                                value="<?= htmlspecialchars($_POST['modelo'] ?? '') ?>">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Número de Série</label>
-                            <input type="text" class="form-control" name="numero_serie" value="<?= htmlspecialchars($_POST['numero_serie'] ?? '') ?>">
+                            <input type="text" class="form-control" name="numero_serie"
+                                value="<?= htmlspecialchars($_POST['numero_serie'] ?? '') ?>">
                         </div>
                     </div>
 
                     <h5 class="text-primary border-bottom pb-2 mb-4 mt-5">2. Relação de Componentes</h5>
                     <div class="row g-3 mb-4">
                         <div class="col-12">
-                            <label class="form-label fw-bold text-muted">Este item é um componente/acessório de outro equipamento?</label>
+                            <label class="form-label fw-bold text-muted">Este item é um componente/acessório de outro
+                                equipamento?</label>
                             <select class="form-select" name="parent_id">
                                 <option value="">Não (É um equipamento principal ou item isolado)</option>
                                 <?php foreach ($equipamentos_principais as $eq): ?>
@@ -158,7 +166,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <small class="text-muted">Se for um sensor, cabo ou bateria, selecione a máquina principal acima.</small>
+                            <small class="text-muted">Se for um sensor, cabo ou bateria, selecione a máquina principal
+                                acima.</small>
                         </div>
                     </div>
 
@@ -184,7 +193,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label fw-bold">Localização Atual <span class="text-danger">*</span></label>
+                            <label class="form-label fw-bold">Localização Atual <span
+                                    class="text-danger">*</span></label>
                             <select class="form-select" name="localizacao_id" required>
                                 <option value="">Selecione...</option>
                                 <?php foreach ($localizacoes as $loc): ?>
