@@ -16,10 +16,10 @@ require_once __DIR__ . '/../../config/db_connect.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo APP_NAME; ?></title>
-    <link href="/PROJECTO/private/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="/PROJECTO/private/assets/css/styles.css" rel="stylesheet">
-    <link href="/PROJECTO/private/assets/fontawesome/fontawesome.min.css" rel="stylesheet">
-    <link href="/PROJECTO/private/assets/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/private/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/private/assets/css/styles.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/private/assets/fontawesome/fontawesome.min.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/private/assets/sweetalert2/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body>

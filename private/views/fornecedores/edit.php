@@ -1,7 +1,7 @@
 <?php
 
-require_once private_root . 'includes/header.php';
-require_once private_root . 'includes/sidebar.php';
+require_once __DIR__ . '/../../includes/header.php';
+require_once __DIR__ . '/../../includes/sidebar.php';
 
 $error_msg = null;
 $fornecedor = null;
@@ -193,5 +193,5 @@ div class="row">
 </div>
 </div>
 <?php
-require_once private_root . 'includes/footer.php';
+require_once __DIR__ . '/../../includes/footer.php';
 ?>

@@ -2,10 +2,10 @@
 
 session_start();
 
-require_once private_root . 'config/db_connect.php';
+require_once BASE_URL . '/config/db_connect.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /public/index.php");
+    header("Location: " . BASE_URL . "/public/index.php");
     exit;
 }
 

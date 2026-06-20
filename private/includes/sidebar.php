@@ -5,21 +5,35 @@
         <span class="badge bg-secondary d-block mt-2"><?= htmlspecialchars($_SESSION['user_perfil']); ?></span>
     </div>
     <div class="list-group list-group-flush mt-2">
-        <a href="/PROJECTO/backoffice/dashboard.php"
-            class="list-group-item list-group-item-dark p-3 border-0">📊Dashboard</a>
-        <a href="/PROJECTO/backoffice/views/equipamentos/index.php"
-            class="list-group-item list-group-item-dark p-3 border-0">🩺 Equipamentos</a>
-        <a href="/PROJECTO/backoffice/views/localizacoes/index.php"
-            class="list-group-item list-group-item-dark p-3 border-0">📍 Localizações</a>
-        <a href="/PROJECTO/backoffice/views/fornecedores/index.php"
-            class="list-group-item list-group-item-dark p-3 border-0">🏢 Fornecedores</a>
+        <a href="<?= BASE_URL ?>/../private/dashboard.php" class="list-group-item list-group-item-dark p-3 border-0">
+            <i class="fa-solid fa-chart-line me-2"></i> Dashboard
+        </a>
+
+        <a href="<?= BASE_URL ?>/../private/views/equipamento/index.php"
+            class="list-group-item list-group-item-dark p-3 border-0">
+            <i class="fa-solid fa-stethoscope me-2"></i> Equipamentos
+        </a>
+
+        <?php if ($_SESSION['user_perfil'] === 'Admin' || $_SESSION['user_perfil'] === 'Tecnico'): ?>
+            <a href="<?= BASE_URL ?>/../private/views/localizacoes/index.php"
+                class="list-group-item list-group-item-dark p-3 border-0">
+                <i class="fa-solid fa-location-dot me-2"></i> Localizações
+            </a>
+            <a href="<?= BASE_URL ?>/../private/views/fornecedores/index.php"
+                class="list-group-item list-group-item-dark p-3 border-0">
+                <i class="fa-solid fa-building me-2"></i> Fornecedores
+            </a>
+        <?php endif; ?>
 
         <?php if ($_SESSION['user_perfil'] === 'Admin'): ?>
-            <a href="/PROJECTO/backoffice/views/users/index.php" class="list-group-item list-group-item-dark p-3 border-0 text-warning">⚙️ Gerir Utilizadores</a>
+            <a href="<?= BASE_URL ?>/../private/views/users/index.php"
+                class="list-group-item list-group-item-dark p-3 border-0 text-warning">
+                <i class="fa-solid fa-users me-2"></i> Gerir Utilizadores
+            </a>
         <?php endif; ?>
     </div>
     <div class="list-group list-group-flush p-3 border-top border-secondary">
-        <a href="/PROJECTO/login/logout.php" class="text-light text-decoration-none">Sair</a>
+        <a href="<?= BASE_URL ?>/login/logout.php" class="text-light text-decoration-none">Sair</a>
     </div>
 </aside>
 

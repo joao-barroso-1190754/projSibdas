@@ -1,7 +1,7 @@
 <?php
 
-require_once private_root . 'includes/header.php';
-require_once private_root . 'includes/sidebar.php';
+require_once __DIR__ . '/../../includes/header.php'; 
+require_once __DIR__ . '/../../includes/sidebar.php';
 
 try {
     $stmt = $pdo->query("SELECT * FROM fornecedores ORDER BY nome_empresa ASC");
@@ -42,29 +42,6 @@ try {
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif; ?>
-
-<div class="row mb-4">
-    <div class="col-md-8">
-        <h2 class="text-secondary">🏢 Gestão de Fornecedores</h2>
-        <p class="text-muted">Gira os fabricantes, distribuidores e empresas de assistência técnica.</p>
-    </div>
-    <div class="col-md-4 text-end align-self-center">
-        <a href="create" class="btn btn-primary fw-bold shadow-sm">+ Novo Fornecedor</a>
-    </div>
-</div>
-
-<div class="alert alert-danger">Erro!</div>
-
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    Erro!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-
-
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    Sucesso!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
 
 <div class="card shadow-sm border-0">
     <div class="card-body p-0">
@@ -124,5 +101,5 @@ try {
     </div>
 </div>
 <?php
-require_once private_root . 'includes/footer.php';
+require_once __DIR__ . '/../../includes/footer.php';
 ?>
