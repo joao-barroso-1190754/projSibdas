@@ -7,29 +7,24 @@ function isActive($needle, $path) {
 require_once __DIR__ . '\includes\header.php';
 require_once __DIR__ . '\includes\sidebar.php';
 
-// Total de equipamentos (não apagados)
 $total_equipamentos = $pdo->query(
     "SELECT COUNT(*) FROM equipamentos WHERE apagado = FALSE"
 )->fetchColumn();
 
-// Equipamentos ativos
 $total_ativos = $pdo->query(
     "SELECT COUNT(*) FROM equipamentos WHERE apagado = FALSE AND estado = 'Ativo'"
 )->fetchColumn();
 
-// Em manutenção OU em calibração — agrupados, já que ambos significam "fora de serviço temporariamente"
 $total_manutencao = $pdo->query(
     "SELECT COUNT(*) FROM equipamentos 
      WHERE apagado = FALSE AND estado IN ('Em manutenção', 'Em calibração')"
 )->fetchColumn();
 
-// TODO (seu): considerar um quarto cartão para 'Inativo', se fizer sentido no fluxo da clínica
 $total_inativos = $pdo->query(
     "SELECT COUNT(*) FROM equipamentos 
      WHERE apagado = FALSE AND estado = 'Inativo'"
 )->fetchColumn();
 
-// Equipamento crítico que não está ativo — provavelmente a informação mais "actionable" do dashboard
 $stmt = $pdo->query(
     "SELECT codigo_interno, designacao, estado, criticidade 
      FROM equipamentos 
@@ -39,6 +34,38 @@ $stmt = $pdo->query(
      ORDER BY designacao"
 );
 $equip_criticos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+try {
+    $stmtLogs = $pdo->query("
+        SELECT l.acao, l.data_registo, e.codigo_interno, e.designacao, u.nome AS utilizador
+        FROM logs_equipamentos l
+        JOIN equipamentos e ON l.equipamento_id = e.id
+        JOIN utilizadores u ON l.utilizador_id = u.id
+        ORDER BY l.data_registo DESC LIMIT 10
+    ");
+    $logs = $stmtLogs->fetchAll(PDO::FETCH_ASSOC);
+
+    $log_html = "<div class='table-responsive'><table class='table table-sm table-striped text-start' style='font-size: 0.85rem;'>
+                    <thead><tr><th>Data</th><th>Equipamento</th><th>Ação</th><th>Utilizador</th></tr></thead><tbody>";
+    
+    if (empty($logs)) {
+        $log_html .= "<tr><td colspan='4' class='text-center text-muted'>Nenhum registo encontrado.</td></tr>";
+    } else {
+        foreach ($logs as $log) {
+            $data_formatada = date('d/m H:i', strtotime($log['data_registo']));
+            $log_html .= "<tr>
+                            <td class='text-nowrap'>{$data_formatada}</td>
+                            <td><b>{$log['codigo_interno']}</b><br><small class='text-muted'>{$log['designacao']}</small></td>
+                            <td><span class='badge bg-secondary'>{$log['acao']}</span></td>
+                            <td>{$log['utilizador']}</td>
+                          </tr>";
+        }
+    }
+    $log_html .= "</tbody></table></div>";
+
+} catch (PDOException $e) {
+    $log_html = "<div class='alert alert-danger'>Erro ao carregar histórico.</div>";
+}
 ?>
 
 <div class="row mb-4">
@@ -110,6 +137,13 @@ $equip_criticos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tbody>
             </table>
         <?php endif; ?>
+    </div>
+</div>
+<div class="row mb-4 mt-4">
+    <div class="col-12 text-end">
+        <button onclick="verHistorico()" class="btn btn-outline-primary shadow-sm">
+            <i class="fa-solid fa-clock-rotate-left me-2"></i>Ver Histórico de Intervenções
+        </button>
     </div>
 </div>
 

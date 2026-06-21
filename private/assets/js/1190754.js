@@ -67,3 +67,13 @@ function exportarPDF() {
         acoesCells.forEach(cell => cell.style.display = '');
     });
 }
+
+function verHistorico() {
+    Swal.fire({
+        title: 'Últimas Intervenções',
+        html: `<?= $log_html ?>`, 
+        width: '800px',
+        showCloseButton: true,
+        showConfirmButton: false
+    });
+}

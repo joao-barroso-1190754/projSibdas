@@ -22,6 +22,14 @@
   --bs-btn-active-border-color: var(--accent);
 }
 
+.btn-outline-primary {
+  --bs-btn-border-color: var(--primary);
+  --bs-btn-color: var(--primary);
+  --bs-btn-hover-bg: var(--primary);
+  --bs-btn-hover-border-color: var(--primary);
+  --bs-btn-hover-color: #fff;
+}
+
 body {
   overflow-x: hidden;
 }

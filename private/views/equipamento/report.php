@@ -14,6 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
         $stmt = $pdo->prepare("UPDATE equipamentos SET estado = 'Em manutenção' WHERE id = :id");
         $stmt->execute([':id' => $id]);
         
+        $log_sql = "INSERT INTO logs_equipamentos (equipamento_id, utilizador_id, acao) VALUES (:eq_id, :user_id, 'Reportada Avaria (Em Manutenção)')";
+        $log_stmt = $pdo->prepare($log_sql);
+        $log_stmt->execute([':eq_id' => $id, ':user_id' => $_SESSION['user_id']]);
+        
         $_SESSION['success_msg'] = "Avaria reportada com sucesso. A equipa técnica foi notificada.";
         
     } catch (PDOException $e) {
