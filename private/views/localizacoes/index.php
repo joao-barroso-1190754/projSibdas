@@ -21,9 +21,11 @@ try {
         <h2 class="text-secondary">📍 Gestão de Localizações</h2>
         <p class="text-muted">Gira os edifícios, serviços e salas da clinica.</p>
     </div>
-    <div class="col-md-4 text-end align-self-center">
-        <a href="create.php" class="btn btn-primary fw-bold shadow-sm">+ Nova Localização</a>
-    </div>
+    <?php if ($_SESSION['user_perfil'] === 'Admin'): ?>
+        <div class="col-md-4 text-end align-self-center">
+            <a href="create.php" class="btn btn-primary fw-bold shadow-sm">+ Nova Localização</a>
+        </div>
+    <?php endif; ?>
 </div>
 
 <?php if (isset($error_msg)): ?>
@@ -83,11 +85,15 @@ try {
                                     <?= htmlspecialchars($loc['sala_gabinete']); ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="edit.php?id=<?= $loc['id']; ?>" class="btn btn-sm btn-outline-warning">Editar</a>
-                                    <form action="delete.php" method="POST" class="d-inline delete-form">
-                                        <input type="hidden" name="id" value="<?= $loc['id']; ?>">
-                                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
-                                    </form>
+                                    <?php if ($_SESSION['user_perfil'] === 'Admin'): ?>
+                                        <a href="edit.php?id=<?= $loc['id']; ?>" class="btn btn-sm btn-outline-warning">Editar</a>
+                                        <form action="delete.php" method="POST" class="d-inline delete-form">
+                                            <input type="hidden" name="id" value="<?= $loc['id']; ?>">
+                                            <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <span class="text-muted small">Apenas consulta</span>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

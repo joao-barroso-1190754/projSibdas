@@ -34,16 +34,70 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const form = this.closest('.report-form');
             Swal.fire({
-                title: 'Reportar Avaria?',
-                text: "O equipamento será marcado com estado 'Em manutenção'.",
+                title: 'Reportar Avaria',
+                html: "O equipamento será marcado com estado 'Em manutenção'.",
+                input: 'textarea',
+                inputLabel: 'Descrição da avaria (opcional)',
+                inputPlaceholder: 'Ex: equipamento a fazer ruído estranho, ecrã não liga, etc.',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#ffc107', // Warning yellow
+                confirmButtonColor: '#ffc107',
                 cancelButtonColor: '#6c757d',
                 confirmButtonText: 'Sim, reportar',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
-                if (result.isConfirmed) { form.submit(); }
+                if (result.isConfirmed) {
+                    let notaInput = form.querySelector('input[name="nota"]');
+                    if (!notaInput) {
+                        notaInput = document.createElement('input');
+                        notaInput.type = 'hidden';
+                        notaInput.name = 'nota';
+                        form.appendChild(notaInput);
+                    }
+                    notaInput.value = result.value || '';
+                    form.submit();
+                }
+            });
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Technician status update
+    const updateButtons = document.querySelectorAll('.btn-update-status');
+    updateButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const form = this.closest('.status-update-form');
+            const estadoAtual = this.dataset.estado;
+
+            Swal.fire({
+                title: 'Atualizar Estado do Equipamento',
+                html:
+                    '<select id="swal-estado" class="swal2-select">' +
+                        '<option value="Ativo">Ativo</option>' +
+                        '<option value="Em manutenção">Em manutenção</option>' +
+                        '<option value="Em calibração">Em calibração</option>' +
+                        '<option value="Inativo">Inativo</option>' +
+                    '</select>' +
+                    '<textarea id="swal-nota" class="swal2-textarea" placeholder="Nota sobre a intervenção (ex: peça substituída, calibração concluída...)"></textarea>',
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                cancelButtonText: 'Cancelar',
+                didOpen: () => {
+                    document.getElementById('swal-estado').value = estadoAtual;
+                },
+                preConfirm: () => {
+                    return {
+                        estado: document.getElementById('swal-estado').value,
+                        nota: document.getElementById('swal-nota').value
+                    };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.querySelector('input[name="estado"]').value = result.value.estado;
+                    form.querySelector('input[name="nota"]').value = result.value.nota;
+                    form.submit();
+                }
             });
         });
     });

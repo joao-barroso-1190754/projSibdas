@@ -6,6 +6,11 @@ function isActive($needle, $path) {
 require_once __DIR__ . '/../../includes/header.php';
 require_once __DIR__ . '/../../includes/sidebar.php';
 
+if ($_SESSION['user_perfil'] !== 'Admin') {
+    header("Location: " . BASE_URL . "/private/views/fornecedores/index.php");
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_empresa = trim($_POST['nome_empresa']);
     $nif = trim($_POST['nif']);

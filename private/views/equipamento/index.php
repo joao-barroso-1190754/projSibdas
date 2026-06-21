@@ -95,7 +95,7 @@ function getCriticidadeBadge($criticidade)
         <p class="text-muted">Inventário geral do parque tecnológico hospitalar.</p>
     </div>
 
-    <?php if ($_SESSION['user_perfil'] !== 'Normal'): ?>
+    <?php if ($_SESSION['user_perfil'] === 'Admin'): ?>
         <div class="col-md-4 text-end align-self-center">
             <a href="create.php" class="btn btn-primary fw-bold shadow-sm">+ Novo Equipamento</a>
         </div>
@@ -211,6 +211,19 @@ function getCriticidadeBadge($criticidade)
                                             <?php else: ?>
                                                 <span class="text-muted small">Em intervenção</span>
                                             <?php endif; ?>
+
+                                        <?php elseif ($_SESSION['user_perfil'] === 'Tecnico'): ?>
+                                            <form action="update.php" method="POST" class="d-inline status-update-form">
+                                                <input type="hidden" name="id" value="<?= $eq['id']; ?>">
+                                                <input type="hidden" name="estado" value="">
+                                                <input type="hidden" name="nota" value="">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline-primary btn-update-status"
+                                                    data-id="<?= $eq['id']; ?>"
+                                                    data-estado="<?= htmlspecialchars($eq['estado']); ?>">
+                                                    Atualizar Estado
+                                                </button>
+                                            </form>
 
                                         <?php else: ?>
                                             <a href="edit.php?id=<?= $eq['id']; ?>"

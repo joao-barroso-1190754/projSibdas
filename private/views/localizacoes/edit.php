@@ -6,6 +6,11 @@ function isActive($needle, $path) {
 require_once __DIR__ . '/../../includes/header.php'; 
 require_once __DIR__ . '/../../includes/sidebar.php';
 
+if ($_SESSION['user_perfil'] !== 'Admin') {
+    header("Location: " . BASE_URL . "/private/views/localizacoes/index.php");
+    exit;
+}
+
 $error_msg = null;
 $loc = null; 
 
