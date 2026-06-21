@@ -82,6 +82,13 @@ function getCriticidadeBadge($criticidade)
 }
 ?>
 
+<?php if (isset($_SESSION['success_msg'])): ?>
+    <div class="alert alert-success shadow-sm"><?= htmlspecialchars($_SESSION['success_msg']); unset($_SESSION['success_msg']); ?></div>
+<?php endif; ?>
+<?php if (isset($_SESSION['error_msg'])): ?>
+    <div class="alert alert-danger shadow-sm"><?= htmlspecialchars($_SESSION['error_msg']); unset($_SESSION['error_msg']); ?></div>
+<?php endif; ?>
+
 <div class="row mb-4">
     <div class="col-md-8">
         <h2 class="text-secondary"><i class="fa-solid fa-stethoscope me-2"></i>Gestão de Equipamentos</h2>
