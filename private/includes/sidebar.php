@@ -23,6 +23,10 @@
                 class="list-group-item list-group-item-dark p-3 border-0 <?= isActive('/fornecedores/', $current_path) ?>">
                 <i class="fa-solid fa-building me-2"></i> Fornecedores
             </a>
+            <a href="<?= BASE_URL ?>/private/views/logs/index.php"
+                class="list-group-item list-group-item-dark p-3 border-0 <?= isActive('/logs/', $current_path) ?>">
+                <i class="fa-solid fa-clock-rotate-left me-2"></i> Histórico
+            </a>
         <?php endif; ?>
 
         <?php if ($_SESSION['user_perfil'] === 'Admin'): ?>

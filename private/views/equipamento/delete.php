@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
         
         $log_sql = "INSERT INTO logs_equipamentos (equipamento_id, utilizador_id, acao) VALUES (:eq_id, :user_id, 'Equipamento Abatido / Removido')";
         $log_stmt = $pdo->prepare($log_sql);
-        $log_stmt->execute([':eq_id' => $target_id, ':user_id' => $_SESSION['user_id']]);
+        $log_stmt->execute([':eq_id' => $id, ':user_id' => $_SESSION['user_id']]);
         
         $_SESSION['success_msg'] = "Equipamento/Componente removido do inventário ativo.";
         

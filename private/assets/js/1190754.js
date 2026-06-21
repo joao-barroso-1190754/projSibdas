@@ -68,12 +68,16 @@ function exportarPDF() {
     });
 }
 
-function verHistorico() {
-    Swal.fire({
-        title: 'Últimas Intervenções',
-        html: `<?= $log_html ?>`, 
-        width: '800px',
-        showCloseButton: true,
-        showConfirmButton: false
-    });
+function exportarHistoricoPDF() {
+    const element = document.getElementById('tabela-historico');
+ 
+    const opt = {
+        margin:       10,
+        filename:     'Historico_Intervencoes.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+    };
+ 
+    html2pdf().set(opt).from(element).save();
 }

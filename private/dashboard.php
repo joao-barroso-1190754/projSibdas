@@ -41,30 +41,12 @@ try {
         FROM logs_equipamentos l
         JOIN equipamentos e ON l.equipamento_id = e.id
         JOIN utilizadores u ON l.utilizador_id = u.id
-        ORDER BY l.data_registo DESC LIMIT 10
+        ORDER BY l.data_registo DESC LIMIT 5
     ");
-    $logs = $stmtLogs->fetchAll(PDO::FETCH_ASSOC);
-
-    $log_html = "<div class='table-responsive'><table class='table table-sm table-striped text-start' style='font-size: 0.85rem;'>
-                    <thead><tr><th>Data</th><th>Equipamento</th><th>Ação</th><th>Utilizador</th></tr></thead><tbody>";
-    
-    if (empty($logs)) {
-        $log_html .= "<tr><td colspan='4' class='text-center text-muted'>Nenhum registo encontrado.</td></tr>";
-    } else {
-        foreach ($logs as $log) {
-            $data_formatada = date('d/m H:i', strtotime($log['data_registo']));
-            $log_html .= "<tr>
-                            <td class='text-nowrap'>{$data_formatada}</td>
-                            <td><b>{$log['codigo_interno']}</b><br><small class='text-muted'>{$log['designacao']}</small></td>
-                            <td><span class='badge bg-secondary'>{$log['acao']}</span></td>
-                            <td>{$log['utilizador']}</td>
-                          </tr>";
-        }
-    }
-    $log_html .= "</tbody></table></div>";
-
+    $logs_recentes = $stmtLogs->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    $log_html = "<div class='alert alert-danger'>Erro ao carregar histórico.</div>";
+    $logs_recentes = [];
+    $logs_error = "Erro ao carregar histórico recente.";
 }
 ?>
 
@@ -117,7 +99,7 @@ try {
     </div>
 </div>
 <div class="row mt-4">
-    <div class="col-12">
+    <div class="col-6">
         <h4 class="text-secondary">Equipamento de Suporte de Vida Fora de Serviço</h4>
         <?php if (empty($equip_criticos)): ?>
             <p class="text-muted">Nenhum equipamento crítico fora de serviço. ✓</p>
@@ -138,12 +120,34 @@ try {
             </table>
         <?php endif; ?>
     </div>
-</div>
-<div class="row mb-4 mt-4">
-    <div class="col-12 text-end">
-        <button onclick="verHistorico()" class="btn btn-outline-primary shadow-sm">
-            <i class="fa-solid fa-clock-rotate-left me-2"></i>Ver Histórico de Intervenções
-        </button>
+    <div class="col-6">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h4 class="text-secondary mb-0">Atividade Recente</h4>
+        </div>
+        <?php if (isset($logs_error)): ?>
+            <div class="alert alert-danger shadow-sm"><?= htmlspecialchars($logs_error) ?></div>
+        <?php elseif (empty($logs_recentes)): ?>
+            <p class="text-muted">Nenhum registo de atividade ainda.</p>
+        <?php else: ?>
+            <div class="table-responsive">
+                <table class="table table-sm table-striped">
+                    <thead><tr><th>Data</th><th>Equipamento</th><th>Ação</th><th>Utilizador</th></tr></thead>
+                    <tbody>
+                        <?php foreach ($logs_recentes as $log): ?>
+                            <tr>
+                                <td class="text-nowrap"><?= htmlspecialchars(date('d/m H:i', strtotime($log['data_registo']))) ?></td>
+                                <td>
+                                    <b><?= htmlspecialchars($log['codigo_interno']) ?></b><br>
+                                    <small class="text-muted"><?= htmlspecialchars($log['designacao']) ?></small>
+                                </td>
+                                <td><span class="badge bg-secondary"><?= htmlspecialchars($log['acao']) ?></span></td>
+                                <td><?= htmlspecialchars($log['utilizador']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
