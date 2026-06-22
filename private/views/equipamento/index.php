@@ -231,7 +231,9 @@ function getCriticidadeBadge($criticidade)
                                             <form action="delete.php" method="POST" class="d-inline delete-form">
                                                 <input type="hidden" name="id" value="<?= $eq['id']; ?>">
                                                 <button type="button"
-                                                    class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
+                                                    class="btn btn-sm btn-outline-danger btn-delete"
+                                                    data-confirm-title="Remover equipamento?"
+                                                    data-confirm-text="O histórico e documentos associados também serão apagados!">Remover</button>
                                             </form>
                                         <?php endif; ?>
 

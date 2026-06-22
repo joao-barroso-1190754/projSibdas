@@ -11,9 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
     deleteButtons.forEach(button => {
         button.addEventListener('click', function() {
             const form = this.closest('.delete-form');
+            const title = this.dataset.confirmTitle || 'Remover registo?';
+            const text = this.dataset.confirmText || 'Esta ação não pode ser revertida.';
             Swal.fire({
-                title: 'Remover equipamento?',
-                text: "O histórico e documentos associados também serão apagados!",
+                title: title,
+                text: text,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',

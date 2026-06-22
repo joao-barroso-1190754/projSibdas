@@ -34,6 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $localizacoes = $pdo->query("SELECT id, edificio, servico_departamento, sala_gabinete FROM localizacoes WHERE apagado = FALSE")->fetchAll();
         $fornecedores = $pdo->query("SELECT id, nome_empresa FROM fornecedores WHERE apagado = FALSE ORDER BY nome_empresa")->fetchAll();
 
+        $stmtCurrentForn = $pdo->prepare("SELECT fornecedor_id FROM equipamento_fornecedor WHERE equipamento_id = :id LIMIT 1");
+        $stmtCurrentForn->execute([':id' => $id]);
+        $fornecedor_atual_id = $stmtCurrentForn->fetchColumn() ?: null;
 
         $stmtEq = $pdo->prepare("SELECT id, codigo_interno, designacao FROM equipamentos WHERE apagado = FALSE AND id != :id");
         $stmtEq->execute([':id' => $id]);
@@ -60,12 +63,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $parent_id = !empty($_POST['parent_id']) ? $_POST['parent_id'] : null;
     $observacoes = trim($_POST['observacoes']);
+    $fornecedor_id = !empty($_POST['fornecedor_id']) ? $_POST['fornecedor_id'] : null;
 
     if (empty($codigo) || empty($designacao) || empty($estado) || empty($localizacao_id)) {
         $error_msg = "Por favor, preencha todos os campos obrigatórios (*).";
         $eq = $_POST;
     } else {
         try {
+            $pdo->beginTransaction();
+
             $sql = "UPDATE equipamentos 
                     SET codigo_interno = :codigo, designacao = :desig, categoria = :cat, 
                         marca = :marca, modelo = :modelo, numero_serie = :serial, 
@@ -89,11 +95,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ':id' => $id
             ]);
 
+            // Substitui a ligação a fornecedor existente (no máximo um, por decisão de design)
+            $stmtDelForn = $pdo->prepare("DELETE FROM equipamento_fornecedor WHERE equipamento_id = :id");
+            $stmtDelForn->execute([':id' => $id]);
+
+            if ($fornecedor_id) {
+                $stmtForn = $pdo->prepare(
+                    "INSERT INTO equipamento_fornecedor (equipamento_id, fornecedor_id, tipo_relacao) VALUES (:eq_id, :forn_id, 'Fornecedor')"
+                );
+                $stmtForn->execute([':eq_id' => $id, ':forn_id' => $fornecedor_id]);
+            }
+
+            $pdo->commit();
+
             $_SESSION['success_msg'] = "Equipamento atualizado com sucesso!";
             echo "<script>window.location.href='index.php';</script>";
             exit;
 
         } catch (PDOException $e) {
+            $pdo->rollBack();
             $error_msg = "Erro ao atualizar: " . $e->getMessage();
             $eq = $_POST;
         }
@@ -151,14 +171,8 @@ if (!$eq && !isset($error_msg)) {
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Marca</label>
-                            <select class="form-select" name="marca">
-                                <option value="">Selecione a Marca...</option>
-                                <?php foreach ($fornecedores as $forn): ?>
-                                    <option value="<?= htmlspecialchars($forn['nome_empresa']) ?>" <?= (isset($eq['marca']) && $eq['marca'] == $forn['nome_empresa']) ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($forn['nome_empresa']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                            <input type="text" class="form-control" name="marca" placeholder="Ex: Philips, Drager..."
+                                value="<?= htmlspecialchars($eq['marca'] ?? ''); ?>">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Modelo</label>
@@ -169,6 +183,17 @@ if (!$eq && !isset($error_msg)) {
                             <label class="form-label fw-bold">Número de Série</label>
                             <input type="text" class="form-control" name="numero_serie"
                                 value="<?= htmlspecialchars($eq['numero_serie'] ?? ''); ?>">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Fornecedor</label>
+                            <select class="form-select" name="fornecedor_id">
+                                <option value="">Sem fornecedor associado</option>
+                                <?php foreach ($fornecedores as $forn): ?>
+                                    <option value="<?= $forn['id'] ?>" <?= ((isset($fornecedor_atual_id) && $fornecedor_atual_id == $forn['id']) || (isset($_POST['fornecedor_id']) && $_POST['fornecedor_id'] == $forn['id'])) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($forn['nome_empresa']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
 

@@ -10,7 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     $target_id = $_POST['id'];
 
-    // CRITICAL: Prevent the Admin from deleting themselves
     if ($target_id == $_SESSION['user_id']) {
         $_SESSION['error_msg'] = "Ação bloqueada: Não pode remover a sua própria conta ativa.";
     } else {

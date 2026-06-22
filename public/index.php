@@ -11,37 +11,40 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedTech Solutions</title>
+    <title>Clínica Madureira Loureiro</title>
     <link href="assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/fontawesome/fontawesome.min.css" rel="stylesheet">
+    <link href="assets/css/styles.css?v=<?= time(); ?>" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg fixed-top bg-primary">
         <div class="container">
-            <a class="navbar-brand fw-bold text-light" href="#">MedTech Solutions</a>
+            <a class="navbar-brand fw-bold text-light" href="#inicio">
+                <i class="fa-solid fa-bone me-2"></i>Clínica Madureira Loureiro
+            </a>
             <div>
                 <ul class="navbar-nav">
                     <li><a class="nav-link text-light" href="#inicio">Início</a></li>
-                    <li><a class="nav-link text-light" href="#sobre">Sobre Nós</a></li>
-                    <li><a class="nav-link text-light" href="#solucoes">Soluções</a></li>
-                    <li><a class="nav-link text-light" href="#contato">Contato</a></li>
+                    <li><a class="nav-link text-light" href="#especialidades">Especialidades</a></li>
+                    <li><a class="nav-link text-light" href="#equipa">Equipa</a></li>
+                    <li><a class="nav-link text-light" href="#contacto">Contactos</a></li>
                 </ul>
             </div>
 
             <div class="dropdown">
-                <button class="btn btn-outline-light dropdown-toggle" type="button" id="loginDropdown"
+                <button class="btn btn-outline-light btn-sm dropdown-toggle navbar-staff-link" type="button" id="loginDropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    Acesso Hospital
+                    <i class="fa-solid fa-user-lock me-1"></i> Acesso Interno
                 </button>
                 <div class="dropdown-menu dropdown-menu-end p-4 shadow" style="width: 300px;"
                     aria-labelledby="loginDropdown">
                     <h5 class="mb-3">Login no Sistema</h5>
 
-                    <?php if(isset($_SESSION['login_error'])): ?>
-                    <div class="alert alert-danger py-1 px-2" role="alert">
-                        <?= $_SESSION['login_error']; unset($_SESSION['login_error']); ?>
-                    </div>
+                    <?php if (isset($_SESSION['login_error'])): ?>
+                        <div class="alert alert-danger py-1 px-2" role="alert">
+                            <?= $_SESSION['login_error']; unset($_SESSION['login_error']); ?>
+                        </div>
                     <?php endif; ?>
 
                     <form action="../login/login_process.php" method="POST">
@@ -53,120 +56,146 @@ if (isset($_SESSION['user_id'])) {
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Entrar no Back Office</button>
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
                     </form>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="container text-center mt-5 pt-5">
-        <section id="inicio" class="text-center mb-5 pb-4">
-            <h1 class="display-4 fw-bold text-primary">Bem-vindo à MedTech Solutions</h1>
-            <p class="lead text-muted">Gestão inteligente e rastreamento de equipamentos hospitalares para um
-                atendimento mais ágil e seguro.</p>
-            <a href="#contato" class="btn btn-primary btn-lg mt-3 px-4 rounded-pill">Agendar Demonstração</a>
-        </section>
-
-        <section id="sobre" class="mb-5 pb-5 border-bottom">
-            <h2 class="text-primary mb-4 text-center">Sobre Nós</h2>
-            <div class="row align-items-center">
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <p class="text-muted lead">
-                        A MedTech Solutions é especializada em otimizar o ciclo de vida dos ativos médicos. Nosso
-                        ecossistema de gestão garante que seus equipamentos estejam sempre calibrados, localizáveis e
-                        prontos para salvar vidas.
-                    </p>
-                    <p class="text-muted">
-                        Ajudamos hospitais e clínicas a reduzir o tempo de inatividade das máquinas, evitar compras
-                        desnecessárias de inventário "perdido" e garantir total conformidade com as normas de saúde
-                        vigentes através da digitalização de processos.
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <div
-                        class="bg-light p-5 rounded-3 text-center text-secondary border shadow-sm h-100 d-flex align-items-center justify-content-center">
-                        <span>[Imagem Ilustrativa: Dashboard de Gestão Hospitalar]</span>
+    <main>
+        <section id="inicio" class="text-center" style="margin-top: 0;">
+            <div id="hero" class="py-5">
+                <div class="container py-5">
+                    <div class="icon-circle">
+                        <i class="fa-solid fa-bone"></i>
                     </div>
+                    <h1 class="display-5 fw-bold" style="color: var(--text);">Clínica Madureira Loureiro</h1>
+                    <p class="lead" style="color: var(--text); opacity: 0.85; max-width: 700px; margin: 1rem auto;">
+                        Cuidados especializados em ortopedia e cirurgia, com uma equipa dedicada
+                        a devolver-lhe o movimento e a qualidade de vida.
+                    </p>
+                    <a href="#contacto" class="btn btn-primary btn-lg mt-3 px-4 rounded-pill shadow-sm">
+                        <i class="fa-solid fa-calendar-check me-2"></i>Marcar Consulta
+                    </a>
                 </div>
             </div>
         </section>
-        <!--puta que pariu agr os commits estao em portugues e ingles, lets fucking go-->
-        <section id="solucoes" class="mb-5 pb-5 border-bottom text-center">
-            <h2 class="text-primary mb-4">Nossas Soluções</h2>
-            <p class="text-muted mb-5">Tecnologia de ponta para resolver os maiores gargalos da engenharia clínica.</p>
+
+        <section id="especialidades" class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold" style="color: var(--primary);">As Nossas Especialidades</h2>
+                <p class="text-muted">Cuidados clínicos centrados no diagnóstico preciso e na recuperação do paciente.</p>
+            </div>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0 bg-light">
-                        <div class="card-body p-4">
-                            <div class="mb-3 text-primary fs-1">📍</div>
-                            <h3 class="h5 card-title text-dark fw-bold">Rastreamento RTLS</h3>
-                            <p class="card-text text-muted">Localize bombas de infusão, monitores e cadeiras de rodas em
-                                tempo real, evitando buscas demoradas e perda de ativos.</p>
+                    <div class="card service-card h-100 shadow-sm">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon mx-auto mb-3">
+                                <i class="fa-solid fa-bone"></i>
+                            </div>
+                            <h3 class="h5 fw-bold" style="color: var(--text);">Ortopedia Geral</h3>
+                            <p class="text-muted mb-0">Diagnóstico e tratamento de lesões e patologias do sistema
+                                músculo-esquelético, da consulta à recuperação.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0 bg-light">
-                        <div class="card-body p-4">
-                            <div class="mb-3 text-primary fs-1">⚙️</div>
-                            <h3 class="h5 card-title text-dark fw-bold">Manutenção Preditiva</h3>
-                            <p class="card-text text-muted">Receba alertas automatizados para calibrações e ordens de
-                                serviço preventivas antes que os equipamentos apresentem falhas.</p>
+                    <div class="card service-card h-100 shadow-sm">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon mx-auto mb-3">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <h3 class="h5 fw-bold" style="color: var(--text);">Cirurgia Especializada</h3>
+                            <p class="text-muted mb-0">Intervenções cirúrgicas planeadas ao detalhe, com acompanhamento
+                                próximo antes e depois da operação.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0 bg-light">
-                        <div class="card-body p-4">
-                            <div class="mb-3 text-primary fs-1">📋</div>
-                            <h3 class="h5 card-title text-dark fw-bold">Gestão de Conformidade</h3>
-                            <p class="card-text text-muted">Mantenha todos os laudos técnicos, manuais e históricos de
-                                calibração digitalizados e prontos para auditorias da ONA e ANVISA.</p>
+                    <div class="card service-card h-100 shadow-sm">
+                        <div class="card-body p-4 text-center">
+                            <div class="service-icon mx-auto mb-3">
+                                <i class="fa-solid fa-dumbbell"></i>
+                            </div>
+                            <h3 class="h5 fw-bold" style="color: var(--text);">Reabilitação</h3>
+                            <p class="text-muted mb-0">Planos de recuperação acompanhados, ajustados a cada paciente e à
+                                sua evolução clínica.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contato" class="mb-5">
-            <h2 class="text-primary mb-3 text-center">Contato</h2>
-            <p class="text-muted text-center mb-5">Fale com nossos especialistas e descubra como otimizar a engenharia
-                clínica do seu hospital.</p>
+        <section id="equipa" class="py-5" style="background-color: var(--background);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold" style="color: var(--primary);">A Nossa Equipa</h2>
+                    <p class="text-muted">Profissionais dedicados ao seu acompanhamento clínico.</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4 text-center">
+                        <div class="team-avatar">ML</div>
+                        <h3 class="h5 fw-bold mb-0" style="color: var(--text);">Ortopedia</h3>
+                        <p class="text-muted small">Direção Clínica</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="team-avatar">ML</div>
+                        <h3 class="h5 fw-bold mb-0" style="color: var(--text);">Cirurgia</h3>
+                        <p class="text-muted small">Direção Cirúrgica</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="team-avatar"><i class="fa-solid fa-user-nurse"></i></div>
+                        <h3 class="h5 fw-bold mb-0" style="color: var(--text);">Enfermagem</h3>
+                        <p class="text-muted small">Cuidados &amp; Acompanhamento</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-start">
-                    <form class="bg-light p-4 p-md-5 rounded-3 shadow-sm border">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="nome" class="form-label fw-bold">Nome Completo</label>
-                                <input type="text" class="form-control" id="nome" placeholder="João da Silva" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="hospital" class="form-label fw-bold">Instituição / Hospital</label>
-                                <input type="text" class="form-control" id="hospital" placeholder="Hospital São Lucas"
-                                    required>
-                            </div>
+        <section id="contacto" class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold" style="color: var(--primary);">Contactos &amp; Localização</h2>
+                <p class="text-muted">Estamos disponíveis para esclarecer dúvidas e agendar a sua consulta.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="card service-card h-100 shadow-sm text-center">
+                        <div class="card-body p-4">
+                            <div class="service-icon mx-auto mb-3"><i class="fa-solid fa-location-dot"></i></div>
+                            <h3 class="h6 fw-bold">Endereço</h3>
+                            <p class="text-muted small mb-0">Rua Example, 123<br>4000-000 Porto</p>
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label fw-bold">E-mail Corporativo</label>
-                            <input type="email" class="form-control" id="email" placeholder="joao@hospital.com.br"
-                                required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100 shadow-sm text-center">
+                        <div class="card-body p-4">
+                            <div class="service-icon mx-auto mb-3"><i class="fa-solid fa-phone"></i></div>
+                            <h3 class="h6 fw-bold">Telefone</h3>
+                            <p class="text-muted small mb-0">+351 000 000 000<br>Seg-Sex, 9h-18h</p>
                         </div>
-                        <div class="mb-4">
-                            <label for="mensagem" class="form-label fw-bold">Como podemos ajudar?</label>
-                            <textarea class="form-control" id="mensagem" rows="4"
-                                placeholder="Descreva seus principais desafios na gestão de equipamentos (ex: dificuldade em localizar ativos, falhas no controle de manutenção...)"
-                                required></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100 shadow-sm text-center">
+                        <div class="card-body p-4">
+                            <div class="service-icon mx-auto mb-3"><i class="fa-solid fa-envelope"></i></div>
+                            <h3 class="h6 fw-bold">Email</h3>
+                            <p class="text-muted small mb-0">geral@clinicaml.pt</p>
                         </div>
-                        <div class="text-center d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">Enviar Mensagem</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <footer class="py-4 mt-3">
+        <div class="container text-center">
+            <p class="mb-1 fw-bold text-light">Clínica Madureira Loureiro</p>
+            <p class="small mb-0">&copy; <?= date('Y'); ?> Clínica Madureira Loureiro. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
     <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
 </body>

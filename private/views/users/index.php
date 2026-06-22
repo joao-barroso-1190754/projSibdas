@@ -70,9 +70,11 @@ try {
                             <td class="text-center">
                                 <a href="edit.php?id=<?= $user['id']; ?>" class="btn btn-sm btn-outline-warning">Editar</a>
                                 <?php if ($user['id'] != $_SESSION['user_id']): ?>
-                                    <form action="delete.php" method="POST" class="d-inline" onsubmit="return confirm('Tem a certeza que deseja remover este acesso?');">
+                                    <form action="delete.php" method="POST" class="d-inline delete-form">
                                         <input type="hidden" name="id" value="<?= $user['id']; ?>">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Remover</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete"
+                                            data-confirm-title="Remover este acesso?"
+                                            data-confirm-text="O utilizador perderá imediatamente o acesso ao sistema.">Remover</button>
                                     </form>
                                 <?php else: ?>
                                     <button class="btn btn-sm btn-secondary" disabled>Remover</button>

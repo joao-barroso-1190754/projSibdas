@@ -95,7 +95,9 @@ try {
 
                                         <form action="delete.php" method="POST" class="d-inline delete-form">
                                             <input type="hidden" name="id" value="<?= $forn['id']; ?>">
-                                            <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
+                                            <button type="button" class="btn btn-sm btn-outline-danger btn-delete"
+                                                data-confirm-title="Remover fornecedor?"
+                                                data-confirm-text="Este fornecedor será permanentemente removido do sistema.">Remover</button>
                                         </form>
                                     <?php else: ?>
                                         <span class="text-muted small">Apenas consulta</span>

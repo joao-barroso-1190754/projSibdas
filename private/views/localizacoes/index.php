@@ -89,7 +89,9 @@ try {
                                         <a href="edit.php?id=<?= $loc['id']; ?>" class="btn btn-sm btn-outline-warning">Editar</a>
                                         <form action="delete.php" method="POST" class="d-inline delete-form">
                                             <input type="hidden" name="id" value="<?= $loc['id']; ?>">
-                                            <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Remover</button>
+                                            <button type="button" class="btn btn-sm btn-outline-danger btn-delete"
+                                                data-confirm-title="Remover localização?"
+                                                data-confirm-text="O equipamento associado a esta localização poderá ficar sem sala atribuída.">Remover</button>
                                         </form>
                                     <?php else: ?>
                                         <span class="text-muted small">Apenas consulta</span>

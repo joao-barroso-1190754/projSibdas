@@ -1,14 +1,102 @@
 :root {
     /* altera as cores do BS para as do "tema" escolhido */
     --text: #070b0b;
-    --background: #fafcfc;
-    --primary: #46c0b9;
-    --secondary: #91d5d2;
-    --accent: #67d0cb;
+    --background: #FAF9F6;
+    --primary: #0f6e56;
+    --secondary: #5dcaa5;
+    --accent: #d97a4a;
 
     --bs-primary: var(--primary);
-    --bs-primary-rgb: 70, 192, 185;
+    --bs-primary-rgb: 15, 110, 86;
     --bs-secondary: var(--secondary);
     --bs-body-bg: var(--background);
     --bs-body-color: var(--text);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: var(--accent);
+    --bs-btn-hover-border-color: var(--accent);
+    --bs-btn-active-bg: var(--accent);
+    --bs-btn-active-border-color: var(--accent);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    scroll-behavior: smooth;
+}
+
+#hero {
+    background: linear-gradient(180deg, var(--secondary) 0%, var(--background) 100%);
+    padding-top: 7rem;
+}
+
+#hero .icon-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 1rem;
+}
+
+.service-card {
+    border: none;
+    border-radius: 0.75rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 1.5rem rgba(15, 110, 86, 0.12) !important;
+}
+
+.service-card .service-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--secondary);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.team-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+}
+
+.navbar-staff-link {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+footer {
+    background-color: var(--text);
+    color: #cfcfcf;
+}
+
+footer a {
+    color: #cfcfcf;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--secondary);
 }
