@@ -52,7 +52,7 @@ try {
 
 <div class="row mb-4">
     <div class="col-12">
-        <h2 class="text-secondary">Visão Geral do Parque Tecnológico</h2>
+        <h2 class="text-secondary">Visão Geral da Clínica</h2>
         <hr>
     </div>
 </div>

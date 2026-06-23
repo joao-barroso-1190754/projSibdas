@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo APP_NAME; ?></title>
     <link href="<?= BASE_URL ?>/private/assets/bootstrap/bootstrap.min.css?v=<?= time(); ?>" rel="stylesheet">
-    <link href="<?= BASE_URL ?>/private/assets/css/styles.css?v=<?= time(); ?>" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/private/assets/css/1190754.css?v=<?= time(); ?>" rel="stylesheet">
     <link href="<?= BASE_URL ?>/private/assets/fontawesome/fontawesome.min.css?v=<?= time(); ?>" rel="stylesheet">
     <link href="<?= BASE_URL ?>/private/assets/sweetalert2/sweetalert2.min.css?v=<?= time(); ?>" rel="stylesheet">
 </head>

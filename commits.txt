@@ -1,0 +1,47 @@
+7bc21af - joao-barroso-1190754 - 2026-06-22 18:28:36 +0100 - updated README
+fe39893 - joao-barroso-1190754 - 2026-06-22 18:01:50 +0100 - final edit
+c3de145 - joao-barroso-1190754 - 2026-06-21 16:04:03 +0100 - final commit
+1f72042 - joao-barroso-1190754 - 2026-06-21 11:55:36 +0100 - logs/historico completo
+2de069a - joao-barroso-1190754 - 2026-06-21 11:17:52 +0100 - adicionada func. log
+ca7920a - joao-barroso-1190754 - 2026-06-21 10:52:01 +0100 - fixed delete function paths
+c9a8ee6 - joao-barroso-1190754 - 2026-06-20 19:17:01 +0100 - adicionada funcao exportar
+8b6b9e3 - joao-barroso-1190754 - 2026-06-20 18:19:02 +0100 - correcao dependencias de marca no equipamento
+e705dd1 - joao-barroso-1190754 - 2026-06-20 17:22:01 +0100 - adicionados fonts de fontawesome
+99c685c - joao-barroso-1190754 - 2026-06-20 16:17:34 +0100 - restruturaçao com BASE_URL
+4cfafe5 - joao-barroso-1190754 - 2026-06-20 11:11:44 +0100 - completion users module
+eb01a78 - joao-barroso-1190754 - 2026-06-20 11:08:29 +0100 - modulo users
+f506d15 - joao-barroso-1190754 - 2026-06-20 10:11:37 +0100 - edit fornecedores html -> php (o commit anterior foi create em vez de edit)
+dfb84dd - joao-barroso-1190754 - 2026-06-20 10:10:14 +0100 - edit fornecedores html->php
+a065fc0 - joao-barroso-1190754 - 2026-06-20 10:05:31 +0100 - equip index.html->php
+e15ccfe - joao-barroso-1190754 - 2026-06-20 09:59:23 +0100 - creacao (soft) delete equipamentos
+e25e8fe - joao-barroso-1190754 - 2026-06-19 20:13:34 +0100 - create forncedores html->php
+3594c70 - joao-barroso-1190754 - 2026-06-19 20:11:39 +0100 - edit fornecedores html->php
+6756e4e - joao-barroso-1190754 - 2026-06-17 15:58:03 +0100 - conversao lista forn. html-php
+747ea6c - joao-barroso-1190754 - 2026-06-17 15:50:56 +0100 - criacao processo delete fornecedores
+7ba8d0c - joao-barroso-1190754 - 2026-06-17 15:45:48 +0100 - conversao create loc. html->php
+c182d3f - joao-barroso-1190754 - 2026-06-17 15:40:13 +0100 - covnersao edit localizacoes html->php
+943c637 - joao-barroso-1190754 - 2026-06-17 15:34:21 +0100 - criacao processo delete locations
+5c3b8c7 - joao-barroso-1190754 - 2026-06-17 15:32:34 +0100 - conversao lista localizacoes html->php
+1c018b2 - joao-barroso-1190754 - 2026-06-17 15:24:02 +0100 - conversao dashboard html->php
+2bad007 - joao-barroso-1190754 - 2026-06-17 15:23:45 +0100 - added fontawesome
+b41c277 - joao-barroso-1190754 - 2026-06-17 15:22:30 +0100 - created includes
+f85b2dd - joao-barroso-1190754 - 2026-06-17 14:53:53 +0100 - criacao processo de logout
+e8e3cc3 - joao-barroso-1190754 - 2026-06-17 14:52:51 +0100 - conversao de landing page publica html->php
+0c2defd - joao-barroso-1190754 - 2026-06-17 14:51:54 +0100 - criado processo de login
+29f0686 - joao-barroso-1190754 - 2026-06-17 14:44:56 +0100 - criacao config php
+556798f - joao-barroso-1190754 - 2026-06-11 13:10:31 +0100 - criado edit equipamento
+1c6dce6 - joao-barroso-1190754 - 2026-06-11 12:54:09 +0100 - added create equipamento
+6644948 - joao-barroso-1190754 - 2026-06-11 12:19:01 +0100 - correção de erros (visuais)
+cb5ff7d - joao-barroso-1190754 - 2026-06-11 12:08:51 +0100 - criado edit fornecedores
+0a3dca9 - joao-barroso-1190754 - 2026-06-11 12:08:22 +0100 - criado lista fornecedores (o antigo estava mal, era o create)
+9a11a02 - joao-barroso-1190754 - 2026-06-11 12:07:38 +0100 - criado lista fornecedores
+6d8244f - joao-barroso-1190754 - 2026-06-11 10:37:50 +0100 - added editar localizacoes
+aff1479 - joao-barroso-1190754 - 2026-06-11 10:37:22 +0100 - added criar localizacoes
+cb9a5c5 - joao-barroso-1190754 - 2026-06-11 10:36:50 +0100 - added lista localizacoes
+69365dc - joao-barroso-1190754 - 2026-06-11 10:29:35 +0100 - adicionados assets ao privado
+d695bfb - joao-barroso-1190754 - 2026-06-11 10:19:24 +0100 - adicionado priv dashboard/homepage
+6bbc35e - joao-barroso-1190754 - 2026-06-11 10:17:30 +0100 - adicionado conteudo à pagina de landing
+ebd1e1f - joao-barroso-1190754 - 2026-06-11 10:07:23 +0100 - added CSS
+2e0098a - joao-barroso-1190754 - 2026-06-11 10:02:38 +0100 - added most assets (custom CSS) missing
+c37c01e - joao-barroso-1190754 - 2026-06-11 09:59:38 +0100 - created landing page WIP
+5b271b8 - joao-barroso-1190754 - 2026-06-11 09:46:22 +0100 - criação estrutura do projecto

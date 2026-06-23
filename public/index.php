@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
     <title>Clínica Madureira Loureiro</title>
     <link href="assets/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="assets/fontawesome/fontawesome.min.css" rel="stylesheet">
-    <link href="assets/css/styles.css?v=<?= time(); ?>" rel="stylesheet">
+    <link href="assets/css/1190754.css?v=<?= time(); ?>" rel="stylesheet">
 </head>
 
 <body>
